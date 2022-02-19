@@ -1,0 +1,259 @@
+
+#pdf {
+  background-color: rgb(253, 253, 253);
+  display: block;
+}
+/* VUE3PDF */
+
+.tools {
+  background-color: black;
+  position: fixed;
+  top: 20%;
+  left: 90%;
+  // height: 300px;
+  width: 120px;
+  transition: all 0.5s;
+  .penMode{
+    color: green;
+  }
+  button {
+    cursor: pointer;
+  }
+  .btn {
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    border-radius: 70% 0% 0% 70%;
+    width: 20px;
+    height: 70px;
+    bottom: 35%;
+    right: 90%;
+    transform: translate(-50%, -50%);
+  }
+  .right::after {
+    color: rgb(255, 255, 255);
+    content: "▶";
+    position: relative;
+    bottom: -30%;
+  }
+  &.hideNavBar {
+    left: 100%;
+    transition: all 0.5s;
+  }
+}
+.toolbar_color {
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  width: 498px;
+  height: 300px;
+  background-color: cornsilk;
+  border: bold;
+  transition: all 0.5s;
+  border-radius: 5%;
+  span {
+    cursor: pointer;
+    position: relative;
+    left: 45%;
+    top: 5%;
+  }
+  .color {
+    width: 25px;
+    height: 35px;
+
+    cursor: pointer;
+    &.active {
+      border: 1px solid black;
+    }
+    &.color-272727 {
+      background-color: #272727;
+    }
+    &.color-4D0000 {
+      background-color: #4d0000;
+    }
+    &.color-820041 {
+      background-color: #820041;
+    }
+    &.color-5E005E {
+      background-color: #5e005e;
+    }
+    &.color-3A006F {
+      background-color: #3a006f;
+    }
+    &.color-3A006F {
+      background-color: #3a006f;
+    }
+    &.color-000093 {
+      background-color: #000093;
+    }
+    &.color-003D79 {
+      background-color: #003d79;
+    }
+    &.color-005757 {
+      background-color: #005757;
+    }
+    &.color-01814A {
+      background-color: #01814a;
+    }
+    &.color-007500 {
+      background-color: #007500;
+    }
+    &.color-548C00 {
+      background-color: #548c00;
+    }
+    &.color-5B5B00 {
+      background-color: #5b5b00;
+    }
+    &.color-796400 {
+      background-color: #796400;
+    }
+    &.color-9F5000 {
+      background-color: #9f5000;
+    }
+    &.color-842B00 {
+      background-color: #842b00;
+    }
+    &.color-743A3A {
+      background-color: #743a3a;
+    }
+    &.color-707038 {
+      background-color: #707038;
+    }
+    &.color-3D7878 {
+      background-color: #3d7878;
+    }
+    &.color-5151A2 {
+      background-color: #5151a2;
+    }
+    &.color-7E3D76 {
+      background-color: #7e3d76;
+    }
+    &.color-6C6C6C {
+      background-color: #6c6c6c;
+    }
+    &.color-AE0000 {
+      background-color: #ae0000;
+    }
+    &.color-F00078 {
+      background-color: #f00078;
+    }
+    &.color-D200D2 {
+      background-color: #d200d2;
+    }
+    &.color-8600FF {
+      background-color: #8600ff;
+    }
+    &.color-2828FF {
+      background-color: #2828ff;
+    }
+    &.color-0072E3 {
+      background-color: #0072e3;
+    }
+    &.color-00CACA {
+      background-color: #00caca;
+    }
+    &.color-02DF82 {
+      background-color: #02df82;
+    }
+    &.color-00DB00 {
+      background-color: #00db00;
+    }
+    &.color-8CEA00 {
+      background-color: #8cea00;
+    }
+    &.color-C4C400 {
+      background-color: #c4c400;
+    }
+    &.color-FF8000 {
+      background-color: #ff8000;
+    }
+    &.color-F75000 {
+      background-color: #f75000;
+    }
+    &.color-D9B300 {
+      background-color: #d9b300;
+    }
+    &.color-B87070 {
+      background-color: #b87070;
+    }
+    &.color-AFAF61 {
+      background-color: #afaf61;
+    }
+    &.color-6FB7B7 {
+      background-color: #6fb7b7;
+    }
+    &.color-9999CC {
+      background-color: #9999cc;
+    }
+    &.color-B766AD {
+      background-color: #b766ad;
+    }
+  }
+  .div_span {
+    margin: 10px;
+  }
+  &.hideNavBar_color {
+    display: none;
+  }
+}
+.toolbar_bold{
+  position: fixed;
+  top: 20%;
+  right: 9%;
+  width: 140px;
+  height: 155px;
+  background-color: cornsilk;
+  border: bold;
+  transition: all 0.5s;
+  border-radius: 10%;
+  &.hideNavBar_bold{
+    display: none;
+  }
+  span{
+    cursor: pointer;
+    position: relative;
+    left: 35%;
+    top:5%
+  }
+}
+
+
+/* .color-820041{
+    background-color:	#820041;
+    border: 1px solid black;
+  }
+  .color-820041{
+    background-color:	#820041;
+    border: 1px solid black;
+  }
+  .color-820041{
+    background-color:	#820041;
+    border: 1px solid black;
+  }
+  .color-820041{
+    background-color:	#820041;
+    border: 1px solid black;
+  }
+  .color-820041{
+    background-color:	#820041;
+    border: 1px solid black;
+  }
+  .color-820041{
+    background-color:	#820041;
+    border: 1px solid black;
+  }
+  .color-820041{
+    background-color:	#820041;
+    border: 1px solid black;
+  }
+  .color-820041{
+    background-color:	#820041;
+    border: 1px solid black;
+  }
+  .color-820041{
+    background-color:	#820041;
+    border: 1px solid black;
+  }
+  .color-820041{
+    background-color:	#820041;
+    border: 1px solid black;
+  } */
