@@ -29,12 +29,6 @@ const routes = [
     ],
   },
   {
-    path: "/about",
-    name: "About",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-  {
     path: "/viewboard",
     name: "viewboard",
     meta: { requiresAuth: true },
@@ -48,6 +42,55 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/Login.vue"),
   },
+  {
+    path:"/qrcodeAdditModal",
+    name:"qrcodeAdditModal",
+    component:()=>
+      import("../components/qrcodeAdditModal.vue"),
+  },
+  {
+    path:"/qrcodeFooter",
+    name:"qrcodeFooter",
+    component:()=>
+      import("../components/qrcodeFooter.vue"),
+  },
+  {
+    path:"/qrcodeHeader",
+    name:"qrcodeHeader",
+    component:()=>
+      import("../components/qrcodeHeader.vue"),
+  },
+  {
+    path:"/qrcodeHome",
+    name:"qrcodeHome",
+    component:()=>
+      import("../components/qrcodeHome.vue"),
+  },
+  {
+    path:"/qrcodeMain",
+    name:"qrcodeMain",
+    component:()=>
+      import("../components/qrcodeMain.vue"),
+  },
+  {
+    path:"/qrcodeMain2",
+    name:"qrcodeMain2",
+    component:()=>
+      import("../components/qrcodeMain2.vue"),
+  },
+  {
+    path:"/qrcodeMain3",
+    name:"qrcodeMain3",
+    component:()=>
+      import("../components/qrcodeMain3.vue"),
+  },
+  {
+    path:"/qrcodeSearchmodal",
+    name:"qrcodeSearchmodal",
+    component:()=>
+      import("../components/qrcodeSearchmodal.vue"),
+  },
+
 ];
 
 const router = createRouter({

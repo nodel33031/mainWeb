@@ -37,7 +37,7 @@ export default {
       accountInfo.password = this.password;
       accountInfo.timeStamp = new Date();
       // this.$router.push("../views/viewboard");
-      const apiUrl = `http://192.168.0.20:8000/user/login?sys=video_mgr`;
+      const apiUrl = `http://192.168.0.20:8000/user/login?sys=qrcode_mgr`;
     //   const vm = this
       fetch(apiUrl,{method: 'POST',
                     body: JSON.stringify(accountInfo),
@@ -49,11 +49,13 @@ export default {
         })
         .then((data) => {
             console.log(data[0]);
-            if(data[0] == "qrcode_mgr"){
+            if(data[0] == "ewhiteboard"){
               this.$router.push("../views/viewboard");
               // console.log(12313545644);
             }else if(data[0]=="video_mgr"){
               this.$router.push("../components/Main");                
+            }else if(data[0]=="qrcode_mgr"){
+              this.$router.push("../components/qrcodeHome");
             }
         });
       
