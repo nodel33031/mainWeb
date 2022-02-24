@@ -21,7 +21,7 @@
       @link-clicked="page = $event"
     >
     </pdf>
-    <div class="tools" :class="{ hideNavBar }" style="z-index: 5;">
+    <div class="tools" :class="{ hideNavBar }" style="z-index: 5">
       <div class="btn right" @click="hideNavBar = !hideNavBar"></div>
       <button
         :theme="'default'"
@@ -30,7 +30,7 @@
         @click.stop="prePage"
         class="mr10"
       >
-        <i class="fa fa-arrow-left" style="width:100px">上一頁</i>
+        <i class="fa fa-arrow-left" style="width: 100px">上一頁</i>
       </button>
       <button
         :theme="'default'"
@@ -39,21 +39,27 @@
         @click.stop="nextPage"
         class="mr10"
       >
-        <i class="fa fa-arrow-right" style="width:100px">下一頁</i>
+        <i class="fa fa-arrow-right" style="width: 100px">下一頁</i>
       </button>
       <button @click="resetCanvas()">
-        <i class="fa fa-chalkboard"  style="width:100px">清除</i>
+        <i class="fa fa-chalkboard" style="width: 100px">清除</i>
       </button>
       <button @click="back()">
-        <i class="fa fa-undo"  style="width:100px"> 恢復</i>
+        <i class="fa fa-undo" style="width: 100px"> 恢復</i>
       </button>
       <button>
-        <i class="fas fa-palette"  style="width:100px" @click="hideNavBar_color = !hideNavBar_color"
+        <i
+          class="fas fa-palette"
+          style="width: 100px"
+          @click="hideNavBar_color = !hideNavBar_color"
           >色彩選擇</i
         >
       </button>
       <button>
-        <i class="fas fa-bold"  style="width:100px" @click="hideNavBar_bold = !hideNavBar_bold"
+        <i
+          class="fas fa-bold"
+          style="width: 100px"
+          @click="hideNavBar_bold = !hideNavBar_bold"
           >大小調整</i
         >
       </button>
@@ -64,16 +70,16 @@
           changePaint();
         "
       >
-        <i class="fas fa-pen"  style="width:100px">畫筆模式</i>
+        <i class="fas fa-pen" style="width: 100px">畫筆模式</i>
       </button>
       <button
         class="highlighterMode"
         @click="
-          currentTool='highlighter';
+          currentTool = 'highlighter';
           changeHighlighter();
         "
       >
-        <i class="fas fa-pen-alt"  style="width:100px">螢光筆模式</i>
+        <i class="fas fa-pen-alt" style="width: 100px">螢光筆模式</i>
       </button>
       <button
         class="eraserMode"
@@ -82,7 +88,7 @@
           changeEraser();
         "
       >
-        <i class="fas fa-eraser"  style="width:100px">橡皮擦</i>
+        <i class="fas fa-eraser" style="width: 100px">橡皮擦</i>
       </button>
       <button
         class="squareMode"
@@ -91,11 +97,12 @@
           changeSquare();
         "
       >
-        <i class="fas fa-square"  style="width:100px">方形框</i>
+        <i class="fas fa-square" style="width: 100px">方形框</i>
       </button>
       <!-- <button>
         <i class="fas fa-desktop">全螢幕</i>
       </button> -->
+      <!-- <button @click="getCanvasMousePosition()">555555</button> -->
       <div class="page" style="color: white">
         {{ pageNum }}/{{ pageTotalNum }}
       </div>
@@ -116,12 +123,12 @@
     <div class="toolbar_bold" :class="{ hideNavBar_bold }" style="z-index: 5">
       <span @click="hideNavBar_bold = !hideNavBar_bold">╳</span>
       <div style="margin: 20px">
-        <div style="margin: 0 auto; font-size: 50px">{{ textSize }}</div>        
+        <div style="margin: 0 auto; font-size: 50px">{{ textSize }}</div>
         <i
           class="fas fa-caret-up"
           @click="textSize++"
           style="position: absolute; top: 15%; left: 47%"
-        ></i>        
+        ></i>
         <i
           class="fas fa-caret-down"
           @click="textSize--"
@@ -137,7 +144,7 @@ import pdf from "vue3-pdf";
 export default {
   name: "viewboard",
   components: {
-    pdf,  
+    pdf,
   },
   data() {
     return {
@@ -158,11 +165,12 @@ export default {
       tempCanvas: [],
       tempCanvasIndex: -1,
       isCanvasMouseDown: false,
-      // tempPosition:null,
+      tempPosition: null,
       colors: [
-        { name: "272727", code: "#272727" },
+        { name: "272727", code: "#272727" }, //第一排
         { name: "4D0000", code: "#4D0000" },
         { name: "820041", code: "#820041" },
+        { name: "5E005E", code: "#5E005E" },
         { name: "3A006F", code: "#3A006F" },
         { name: "000093", code: "#000093" },
         { name: "003D79", code: "#003D79" },
@@ -179,10 +187,11 @@ export default {
         { name: "3D7878", code: "#3D7878" },
         { name: "5151A2", code: "#5151A2" },
         { name: "7E3D76", code: "#7E3D76" },
-        { name: "6C6C6C", code: "#6C6C6C" },
+        { name: "6C6C6C", code: "#6C6C6C" }, //第二排
         { name: "AE0000", code: "#AE0000" },
-        { name: "F00078	", code: "#F00078	" },
+        { name: "F00078", code: "#F00078" },
         { name: "D200D2", code: "#D200D2" },
+        { name: "2828FF", code: "#2828FF" },
         { name: "8600FF", code: "#8600FF" },
         { name: "0072E3", code: "#0072E3" },
         { name: "00CACA", code: "#00CACA" },
@@ -198,6 +207,26 @@ export default {
         { name: "6FB7B7", code: "#6FB7B7" },
         { name: "9999CC", code: "#9999CC" },
         { name: "B766AD", code: "#B766AD" },
+        { name: "9D9D9D", code: "#9D9D9D" }, // 第三排
+        { name: "FF0000", code: "#FF0000" },
+        { name: "FF60AF", code: "#FF60AF" },
+        { name: "FF44FF", code: "#FF44FF" },
+        { name: "B15BFF", code: "#B15BFF" },
+        { name: "7D7DFF", code: "#7D7DFF" },
+        { name: "46A3FF", code: "#46A3FF" },
+        { name: "4DFFFF", code: "#4DFFFF" },
+        { name: "4EFEB3", code: "#4EFEB3" },
+        { name: "53FF53", code: "#53FF53" },
+        { name: "B7FF4A", code: "#B7FF4A" },
+        { name: "FFFF37", code: "#FFFF37" },
+        { name: "FFDC35", code: "#FFDC35" },
+        { name: "FFAF60", code: "#FFAF60" },
+        { name: "FF8F59", code: "#FF8F59" },
+        { name: "D9B3B3", code: "#D9B3B3" },
+        { name: "CDCD9A", code: "#CDCD9A" },
+        { name: "A3D1D1", code: "#A3D1D1" },
+        { name: "C7C7E2", code: "#C7C7E2" },
+        { name: "D2A2CC", code: "#D2A2CC" },
       ],
       currentColor: null,
       currentTool: "paint-brush",
@@ -209,19 +238,40 @@ export default {
       // 加載進度
       loadedRatio: 0,
       curPageNum: 0,
+      tempSquare: null, 
+      tempPositionSquare:null     
     };
   },
-  methods: {  
+  methods: {
+    // setCanvasTempPositionSquare(x,y){
+    //   this.tempPositionSquare={x,y}
+    // },
+    // setTempSquare() {
+    //   let ctx = this.canvasContext;
+    //   let canvas = ctx.canvas;
+    //   let tempSquare = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    //   this.tempSquare = tempSquare;
+    // },
+    // getCanvasMousePosition(offsetX, offsetY) {
+    //   let canvasPosition = this.canvasContext.canvas.getBoundingClientRect();
+    //   let x = offsetX - canvasPosition.x;
+    //   let y = offsetY - canvasPosition.y;
+    //   return { x, y };
+    // },
     onCanvasMouseDown() {
-      this.isCanvasMouseDown = true;      
+      this.isCanvasMouseDown = true;
+      // this.setTempSquare();
     },
-    onCanvasMouseUp() {      
+    onCanvasMouseUp() {
       this.isCanvasMouseDown = false;
-      let canvas = this.canvasContext.canvas;
+      let ctx = this.canvasContext;
+      let canvas = ctx.canvas;
       this.tempCanvas.push(
         this.canvasContext.getImageData(0, 0, canvas.width, canvas.height)
       );
       this.tempCanvasIndex += 1;
+      let tempSquare = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      window.history.pushState(tempSquare, null);
     },
     // setTempCanvas() {
     //   let ctx = this.canvasContext;
@@ -260,13 +310,12 @@ export default {
         );
       }
     },
-    changeHighlighter(){      
+    changeHighlighter() {
       this.currentTool = "highlighter";
       document.querySelector(".penMode").style.color = "black";
       document.querySelector(".eraserMode").style.color = "black";
-      document.querySelector(".squareMode").style.color = "black";      
+      document.querySelector(".squareMode").style.color = "black";
       document.querySelector(".highlighterMode").style.color = "green";
-
     },
     changePaint() {
       this.currentTool = "paint-brush";
@@ -313,93 +362,109 @@ export default {
       });
 
       canvas.addEventListener("mousemove", (e) => {
-        // let currentPos = this.getCanvasMousePosition(event.clientX,event.clientY)
+        // let currentPos = this.getCanvasMousePosition(e.offsetX,e.offsetY)
+        //               let tempx = this.tempPositionSquare.x
+        //               let tempy = this.tempPositionSquare.y
+        //               let width = currentPos.x - tempx
+        //               let height = currentPos.y - tempy
         const ctx = canvas.getContext("2d");
         if (this.isDrawing == true) {
           if (this.isPencil == true) {
-            switch (this.currentTool) {
-              case "paint-brush":
-                ctx.globalCompositeOperation = "source-over";
-                ctx.globalAlpha = 1;
-                ctx.strokeStyle = this.currentColor.code;
-                ctx.lineJoin = "round";
-                ctx.lineCap = "round";
+            if (this.isCanvasMouseDown == true) {
+              
 
-                ctx.lineWidth = this.textSize * 3;
-                // 開始設定路徑
-                ctx.beginPath();
-                // 將畫筆移動到下筆座標點
-                ctx.moveTo(this.lastX, this.lastY);
-                // 從目前畫筆位置畫線到新座標點 (滑鼠所在位置)
-                ctx.lineTo(e.offsetX, e.offsetY);
-                // 上面都是在規劃路徑, 這裡才是將線畫出來
-                ctx.stroke();
-                this.lastX = e.offsetX;
-                this.lastY = e.offsetY;
-                break;
-              case "eraser":
-                ctx.globalCompositeOperation = "destination-out";
-                ctx.globalAlpha = 1;
-                ctx.lineJoin = "round";
-                ctx.lineCap = "round";
-                ctx.lineWidth = this.textSize * 3;
-                // 開始設定路徑
-                ctx.beginPath();
-                // 將畫筆移動到下筆座標點
-                ctx.moveTo(this.lastX, this.lastY);
-                // 從目前畫筆位置畫線到新座標點 (滑鼠所在位置)
-                ctx.lineTo(e.offsetX, e.offsetY);
-                // 上面都是在規劃路徑, 這裡才是將線畫出來
-                ctx.stroke();
-                this.lastX = e.offsetX;
-                this.lastY = e.offsetY;
-                break;
-              case "highlighter":
-                ctx.globalCompositeOperation = "xor";
-                ctx.globalAlpha = 0.5;
-                // ctx.globalCompositeOperation = "source-over";
-                ctx.strokeStyle = this.currentColor.code;
-                ctx.lineJoin = "round";
-                ctx.lineCap = "round";           
-                ctx.lineWidth = this.textSize * 3;
-                // 開始設定路徑
-                ctx.beginPath();
-                // 將畫筆移動到下筆座標點
-                ctx.moveTo(this.lastX, this.lastY);
-                // 從目前畫筆位置畫線到新座標點 (滑鼠所在位置)
-                ctx.lineTo(e.offsetX, e.offsetY);
-                // 上面都是在規劃路徑, 這裡才是將線畫出來
-                ctx.stroke();
-                this.lastX = e.offsetX;
-                this.lastY = e.offsetY;
-                break;
-              // case "square":
-              //   let canvasContext = this.canvasContext;
-              //   canvasContext.beginPath();
-              //   canvasContext.lineWidth = this.textSize * 3;
-              //   canvasContext.stroke();
-              //   let currentPos = this.getCanvasMousePosition(
-              //     event.clientX,
-              //     event.clientY
-              //   );
-              //   ctx.strokeStyle = this.currentColor.code;
-              //   let tempx = this.tempPosition.x;
-              //   let tempy = this.tempPosition.y;
-              //   let width = currentPos.x - tempx;
-              //   let height = currentPos.y - tempy;
-
-              //   ctx.putImageData(this.tempCanvas, 0, 0);
-              //   ctx.rect(tempx, tempy, width, height);
-              //   break;
+              switch (this.currentTool) {
+                case "paint-brush":
+                  ctx.globalCompositeOperation = "source-over";
+                  ctx.globalAlpha = 1;
+                  ctx.strokeStyle = this.currentColor.code;
+                  ctx.lineJoin = "round";
+                  ctx.lineCap = "round";
+                  ctx.lineWidth = this.textSize * 3;
+                  // 開始設定路徑
+                  ctx.beginPath();
+                  // 將畫筆移動到下筆座標點
+                  ctx.moveTo(this.lastX, this.lastY);
+                  // 從目前畫筆位置畫線到新座標點 (滑鼠所在位置)
+                  ctx.lineTo(e.offsetX, e.offsetY);
+                  // 上面都是在規劃路徑, 這裡才是將線畫出來
+                  ctx.stroke();
+                  this.lastX = e.offsetX;
+                  this.lastY = e.offsetY;
+                  break;
+                case "eraser":
+                  ctx.globalCompositeOperation = "destination-out";
+                  ctx.globalAlpha = 1;
+                  ctx.lineJoin = "round";
+                  ctx.lineCap = "round";
+                  ctx.lineWidth = this.textSize * 3;
+                  // 開始設定路徑
+                  ctx.beginPath();
+                  // 將畫筆移動到下筆座標點
+                  ctx.moveTo(this.lastX, this.lastY);
+                  // 從目前畫筆位置畫線到新座標點 (滑鼠所在位置)
+                  ctx.lineTo(e.offsetX, e.offsetY);
+                  // 上面都是在規劃路徑, 這裡才是將線畫出來
+                  ctx.stroke();
+                  this.lastX = e.offsetX;
+                  this.lastY = e.offsetY;
+                  break;
+                case "highlighter":
+                  ctx.globalCompositeOperation = "xor";
+                  ctx.globalAlpha = 0.5;
+                  // ctx.globalCompositeOperation = "source-over";
+                  ctx.strokeStyle = this.currentColor.code;
+                  ctx.lineJoin = "round";
+                  ctx.lineCap = "round";
+                  ctx.lineWidth = this.textSize * 3;
+                  // 開始設定路徑
+                  ctx.beginPath();
+                  // 將畫筆移動到下筆座標點
+                  ctx.moveTo(this.lastX, this.lastY);
+                  // 從目前畫筆位置畫線到新座標點 (滑鼠所在位置)
+                  ctx.lineTo(e.offsetX, e.offsetY);
+                  // 上面都是在規劃路徑, 這裡才是將線畫出來
+                  ctx.stroke();
+                  this.lastX = e.offsetX;
+                  this.lastY = e.offsetY;
+                  break;
+                case "square":
+                  // ctx.globalCompositeOperation = "source-over";
+                  // ctx.globalAlpha = 1;
+                  // ctx.strokeStyle = this.currentColor.code;
+                  // ctx.lineJoin = "round";
+                  // ctx.lineCap = "round";
+                  // ctx.lineWidth = this.textSize * 3;
+                  // ctx.rect(500,500,500,500);                  
+                  // ctx.stroke();
+                  // ctx.globalCompositeOperation = "source-over";
+                  // ctx.globalAlpha = 1;
+                  // ctx.strokeStyle = this.currentColor.code;
+                  // ctx.lineJoin = "round";
+                  // ctx.lineCap = "round";
+                  // ctx.lineWidth = this.textSize * 3;
+                  // ctx.beginPath();
+                  // 將畫筆移動到下筆座標點
+                  // ctx.moveTo(this.lastX, this.lastY);
+                  // 從目前畫筆位置畫線到新座標點 (滑鼠所在位置)
+                  // ctx.lineTo(e.offsetX, e.offsetY);
+                  // 上面都是在規劃路徑, 這裡才是將線畫出來
+                  // ctx.stroke();
+                      // ctx.putImageData(this.tempSquare,0, 0)                      
+                      // ctx.rect(tempx, tempy, width, height);
+                  break;
+              }
             }
           }
         }
+        // if(this.currentTool=='square'&& this.isCanvasMouseDown)return
+        // this.setCanvasTempPositionSquare(currentPos.x,currentPos.y)
       });
     },
     setCanvas() {
       let canvas = document.querySelector("#testcanvas");
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = window.innerHeight * 2.5;
       let ctx = canvas.getContext("2d");
       this.canvasContext = ctx;
       console.log("顯示ctx", ctx);

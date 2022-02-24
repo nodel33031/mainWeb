@@ -1,4 +1,5 @@
 <template>
+<qrcodeHeader></qrcodeHeader>
   <div class="container">
     <div class="row">
       <div class="position-relative m-3">
@@ -51,7 +52,7 @@
           >
         </div>
         <button type="button" class="btn btn-primary mx-3" @click="getData()">
-          <i class="bi bi-search"></i>
+          <i class="fa fa-search"></i>
         </button>
       </div>
       <div class="text-center my-3">
@@ -123,8 +124,11 @@
           下一頁<i class="bi bi-chevron-compact-right"></i>
         </button>
       </div>
+      
     </div>
+    
   </div>
+  <Footer></Footer>
   <AdditModal
     :filename="this.currentFilename"
     :Index="this.currentIndex"
@@ -132,8 +136,10 @@
   ></AdditModal>
 </template>
 <script>
-// import Header from "@/components/qrcodeHeader.vue";
+// import qrcodeHeader from "@/components/qrcodeHeader.vue";
 import AdditModal from "../components/qrcodeAdditModal.vue";
+import qrcodeHeader from "../components/qrcodeHeader.vue";
+import Footer from "@/components/qrcodeFooter.vue";
 export default {
   data() {
     return {
@@ -151,7 +157,9 @@ export default {
   },
   components: {
     AdditModal,
-    // Header,
+    qrcodeHeader,
+    Footer,
+    
   },
   methods: {
     selectTr(index) {

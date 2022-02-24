@@ -1,3 +1,4 @@
+
 <template>
   <div class="qrcodeHome">
     <Header></Header>
@@ -5,6 +6,7 @@
     <Searchmodal></Searchmodal>
     <Footer></Footer>
   </div>
+  
 </template>
 <script>
 import Header from "@/components/qrcodeHeader.vue";
@@ -26,3 +28,4 @@ export default {
   height: 100%;
 }
 </style>
+

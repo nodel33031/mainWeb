@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-tw" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://web.ly-edu.com.tw/css/reset.css">
+    <link rel="stylesheet" href="https://web.ly-edu.com.tw/css/video.css">
+    <script src="https://cdn.bootcss.com/video.js/6.6.2/video.js"></script>
+    <script src="https://cdn.bootcss.com/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"></script>
+    <title>柳吟文教 - 試卷詳解影音系統</title>
+</head>
+<body>
+<div class="header">
+    <a><img src="https://www.ly-edu.com.tw/themes/lyedu/assets/img/ly-logo-blue.svg" alt="LOGO"></a>
+</div>
+
+<div class="container">
+    <div id="video_area"></div>
+</div>
+
+<div class="footer">
+    <div class="footerrow">
+        <a><img src="https://www.ly-edu.com.tw/themes/lyedu/assets/img/ly-logo.svg" alt="LOGO"></a>
+    </div>
+    <p class="footerlast">Copyright © 2021 柳吟國文 All Rights Reserved.</p>
+</div>
+
+<script charset="UTF-8" th:inline="javascript">
+    // 需要的參數：影片名稱
+    // 用途：網頁標題、影片標題
+    // 播放影片後跟著變動影片標題
+    //document.title = test;
+    document.title = /*[[${videoListName}]]*/ null;
+    document.title += " - " + /*[[${videoName}]]*/ null;
+    // Div區域 自訂區塊
+    let video_area = document.getElementById("video_area");
+    // Title的部份
+    let videoTitle = document.createElement("h1");
+    videoTitle.textContent = /*[[${videoListName}]]*/ null;
+    videoTitle.textContent += " - " + /*[[${videoName}]]*/ null;
+
+    let videoComment = document.createElement("h1");
+    videoComment.textContent += /*[[${videoComment}]]*/ "";
+
+    // 將title加入到video_area
+    video_area.appendChild(videoTitle);
+
+    if (videoComment.textContent.length != 0 && videoComment.textContent.length == "") {
+        video_area.appendChild(videoComment);
+    }
+
+    // 若無法播放時要顯示的訊息
+    let p = document.createElement("p");
+    p.className = "vjs-no-js";
+    p.textContent = "您無法正常觀看此影片，可能的原因為：\r\n1. 瀏覽器太舊了\r\n 2.未開啟JavaScript功能\r\n如果您需要觀看此影片，請更新瀏覽器後試試！";
+
+    let video = document.createElement("video");
+    video.id = "liu_yin_player";
+    video.className = "video-js vjs-big-play-centered";
+    video.controls = true;
+    video.width = 800;
+    // 640 960
+    video.height = 600;
+    // 480 720
+    video.preload = "auto";
+    video.appendChild(p);
+    //video.appendChild(src);
+    video_area.appendChild(video);
+
+    //let options = {};
+
+    //var player = videojs('liu_yin_player', options, function onPlayerReady() {
+    //    this.play();
+    //});
+    //let player = videojs('liu_yin_player');
+    //player.play();
+    //var options = {hls: {
+    //       withCredentials: true
+    //  }};
+
+    // html5 for html hls
+    let player = videojs('liu_yin_player');
+    // console.log(videojs());
+
+    player.src({
+        src: 'http://192.168.0.20:8000/video/play/212?type=m3u8&fileName=test.m3u8',
+        //src: encodeURI('http://220.130.164.70:8080/hls/21/108-01-15_國一國文輔導_分享_鄒彤憶老師_第29、30題.m3u8'),
+        type: 'application/x-mpegURL',
+        withCredentials: false,
+        overrideNative: true,
+    });
+
+    player.options.nativeAudioTracks = false;
+    player.options.nativeVideoTrack = false;
+
+    player.play();
+</script>
+
+</body>
+</html>

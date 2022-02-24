@@ -31,12 +31,11 @@
               class="btn btn-primary mx-3"
               @click="modalSearch()"
             >
-              <i class="bi bi-search"></i>
+              <i class="fa fa-search"></i>
             </button>
           </div>
           <div class="pt-3 overflow-auto me-5 mt-3" style="height: 400px">
-            <div class="container w-100 fs-5">
-              <!-- <form class="overflow-auto" style="height:500px"> -->
+            <div class="container w-100 fs-5">              
               <div
                 class="row m-2 tr"
                 v-for="(item, index) in modalDatabase"

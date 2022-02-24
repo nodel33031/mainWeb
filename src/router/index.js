@@ -2,31 +2,40 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: "/Header",
-    name: "header",
+    path: "/videoHeader",
+    name: "videoheader",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/Header.vue"),
+      import(/* webpackChunkName: "about" */ "../components/videoHeader.vue"),
   },
   {
-    path: "/Main",
-    name: "Main",
+    path: "/videoMain",
+    name: "videoMain",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/Main.vue"),
+      import(/* webpackChunkName: "about" */ "../components/videoMain.vue"),
     children: [
-      {        
-        path: "list_handout",
+      {
+        path: "videolist_handout",
+        name: "videolist_handout",
         components: {
-          list_handout: () => import("../components/list_handout.vue"),
+          videolist_handout: () =>
+            import("../components/videolist_handout.vue"),
         },
       },
       {
-        path: "list_garbage",
+        path: "videolist_garbage",
+        name: "videolist_garbage",
         components: {
-          list_garbage: () => import("../components/list_garbage.vue"),
+          videolist_garbage: () =>
+            import("../components/videolist_garbage.vue"),
         },
       },
-
     ],
+  },
+  {
+    path: "/videoResource",
+    name: "videoResource",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/videoResource.vue"),
   },
   {
     path: "/viewboard",
@@ -37,60 +46,88 @@ const routes = [
   },
   {
     path: "/",
-    name: "Login",
-    // component:Login,
+    name: "Login",    
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/Login.vue"),
   },
   {
-    path:"/qrcodeAdditModal",
-    name:"qrcodeAdditModal",
-    component:()=>
-      import("../components/qrcodeAdditModal.vue"),
+    path: "/qrcodeAdditModal",
+    name: "qrcodeAdditModal",
+    component: () => import("../components/qrcodeAdditModal.vue"),
   },
   {
-    path:"/qrcodeFooter",
-    name:"qrcodeFooter",
-    component:()=>
-      import("../components/qrcodeFooter.vue"),
+    path: "/qrcodeFooter",
+    name: "qrcodeFooter",
+    component: () => import("../components/qrcodeFooter.vue"),
   },
   {
-    path:"/qrcodeHeader",
-    name:"qrcodeHeader",
-    component:()=>
-      import("../components/qrcodeHeader.vue"),
-  },
-  {
-    path:"/qrcodeHome",
-    name:"qrcodeHome",
-    component:()=>
-      import("../components/qrcodeHome.vue"),
-  },
-  {
-    path:"/qrcodeMain",
-    name:"qrcodeMain",
-    component:()=>
-      import("../components/qrcodeMain.vue"),
-  },
-  {
-    path:"/qrcodeMain2",
-    name:"qrcodeMain2",
-    component:()=>
-      import("../components/qrcodeMain2.vue"),
-  },
-  {
-    path:"/qrcodeMain3",
-    name:"qrcodeMain3",
-    component:()=>
-      import("../components/qrcodeMain3.vue"),
-  },
-  {
-    path:"/qrcodeSearchmodal",
-    name:"qrcodeSearchmodal",
-    component:()=>
-      import("../components/qrcodeSearchmodal.vue"),
+    path: "/qrcodeHeader",
+    name: "qrcodeHeader",
+    component: () => import("../components/qrcodeHeader.vue"),
   },
 
+  {
+    path: "/qrcodeMain",
+    name: "qrcodeMain",
+    component: () => import("../components/qrcodeMain.vue"),
+  },
+  {
+    path: "/qrcodeMain2",
+    name: "qrcodeMain2",
+    component: () => import("../components/qrcodeMain2.vue"),
+  },
+  {
+    path: "/qrcodeMain3",
+    name: "qrcodeMain3",
+    component: () => import("../components/qrcodeMain3.vue"),
+  },
+  {
+    path: "/qrcodeSearchmodal",
+    name: "qrcodeSearchmodal",
+    component: () => import("../components/qrcodeSearchmodal.vue"),
+  },
+  {
+    path: "/videoPlayer",
+    name: "videoPlayer",
+    component: () =>
+      import("../components/videoPlayer.vue"),
+  },
+  {
+    path: "/videoMemberplace",
+    name: "videoMemberplace",
+    alias: '/d',
+    component: () => 
+      import("../components/videoMemberplace.vue"),
+    children: [
+      {
+        path: "videoOrganization",
+        name: "videoOrganization",
+        alias: '/a',
+        components: {
+          videoOrganization: () =>
+            import("../components/videoOrganization.vue"),
+        },
+      },
+      {
+        path: "videoEditinfo",
+        name: "videoEditinfo",
+        alias: '/d',
+        components: {
+          videoEditinfo: () =>
+            import("../components/videoEditinfo.vue"),
+        },
+      },
+      {
+        path: "videoChangepassword",
+        name: "videoChangepassword",
+        alias: '/d',
+        components: {
+          videoChangepassword: () =>
+            import("../components/videoChangepassword.vue"),
+        },
+      },
+    ],
+  },
 ];
 
 const router = createRouter({

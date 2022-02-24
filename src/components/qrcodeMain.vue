@@ -1,4 +1,5 @@
 <template>
+  <Header></Header>
   <Searchmodal v-on:sureMovie="emitMain"></Searchmodal>
   <div class="container py-3">
     <div class="row">
@@ -129,16 +130,20 @@
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 >
-                  <i class="bi bi-search"></i>
+                  <i class="fa fa-search"></i>
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
+        <div style="text-align:left">
+
+        
         <button
           type="button"
           v-on:click="addlist()"
-          class="btn btn-primary me-2"
+          class="btn btn-primary me-2 "    
+          
         >
           增加
         </button>
@@ -148,9 +153,11 @@
         <br />
         <br />
         <div class="btn btn-primary">送出</div>
+        </div>
       </div>
     </div>
   </div>
+  <Footer></Footer>
 </template>
 <style>
 .qrcode {
@@ -165,9 +172,14 @@ table .main1input {
   border-bottom: none;
   /* color: rgb(211, 211, 211); */
 }
+h2{
+  text-align: start;
+}
 </style>
 <script>
+import Header from "@/components/qrcodeHeader.vue";
 import Searchmodal from "@/components/qrcodeSearchmodal.vue";
+import Footer from "@/components/qrcodeFooter.vue";
 const products = [{}];
 export default {
   data() {
@@ -181,6 +193,8 @@ export default {
   },
   components: {
     Searchmodal,
+    Header,
+    Footer
   },
   created() {
     this.products = products;
