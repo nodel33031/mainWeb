@@ -1,6 +1,6 @@
 <template>
 <qrcodeHeader></qrcodeHeader>
-  <div class="container">
+  <div class="container" style="padding-bottom:12rem">
     <div class="row">
       <div class="position-relative m-3">
         <h2 class="text-center">查詢影片</h2>

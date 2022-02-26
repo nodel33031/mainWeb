@@ -1,9 +1,9 @@
 <template>
   <div>
     <!-- <hr /> -->
-    <div class="container" style="margin: 0 auto;padding-bottom:340px">
-      <div class="row">
-        <div class="d-flex justify-content-around m-5">
+    <div style="max-width: 1024px;margin:auto">
+      <!-- <div class="row"> -->
+        <div class="d-flex justify-content-around m-5" style=" padding-bottom:380px">
           <div class="card" >
             <h1 class="m-3">會員帳號</h1>
             <div class="m-3">
@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 <script></script>
@@ -71,14 +71,15 @@
   min-width: 400px;
 }
 .btnBlue {
+  background: #fff;
+  color: #1b1f71;
+  border: 2px solid #1b1f71;  
+  &:hover {
   border: 2px solid #1b1f71;
   border-radius: 5px;
   background: #1b1f71;
   color: #fff;
-  &:hover {
-    background: #fff;
-    color: #1b1f71;
-    border: 2px solid #1b1f71;
   }
 }
+
 </style>

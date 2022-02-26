@@ -42,7 +42,7 @@
 .cardLogin {
   max-width: 544px;
   margin: auto;
-  padding: 40px 5%;
+  box-shadow:0px 4px 15px rgb(224, 221, 221)
 }
 h1 {
   color: #1b1f71;

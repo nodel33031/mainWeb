@@ -3,7 +3,7 @@
     <div class="logo">
         <img src="../assets/LOGO_210623.jpg" alt="">
     </div>
-    <div class="col-8">
+    <div class="col-6">
         <input
           type="radio"
           class="btn-check"
@@ -13,7 +13,7 @@
           @click="videoMain()"          
         />
         <label class="btn btn-outline-primary m-3" for="btnradio1">互動講義</label>
-
+        
         <input
           type="radio"
           class="btn-check"

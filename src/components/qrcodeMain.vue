@@ -1,7 +1,7 @@
 <template>
   <Header></Header>
   <Searchmodal v-on:sureMovie="emitMain"></Searchmodal>
-  <div class="container py-3">
+  <div class="container" style="padding-bottom:12rem">
     <div class="row">
       <div class="col">
         <!-- Content here -->

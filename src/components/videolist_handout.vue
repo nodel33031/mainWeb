@@ -1,15 +1,13 @@
 <template>
   <div class="container">
-    <div style="position: static">
+    <div style="position:static;text-align:right" >
       <button
-        class="btn btn-outline-success me-2"
-        style="position: relative; top: -100px; left: 400px"
+        class="btn btn-outline-success me-2 m-3"        
       >
         建立目錄
       </button>
       <button
-        class="btn btn-outline-success"
-        style="position: relative; top: -100px; left: 400px"
+        class="btn btn-outline-success  m-3"        
       >
         上傳講義
       </button>

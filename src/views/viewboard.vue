@@ -283,17 +283,10 @@ export default {
     resetCanvas() {
       let canvas = this.canvasContext.canvas;
       this.canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-      // this.canvasContext.fillRect(0, 0, canvas.width, canvas.height);
       this.tempCanvas = [];
-      this.tempCanvasIndex = -1;
-      // this.saveCanvasToHistory();
+      this.tempCanvasIndex = -1; 
     },
-    // saveCanvasToHistory() {
-    //   let ctx = this.canvasContext;
-    //   let canvas = ctx.canvas;
-    //   let tempCanvas = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    //   window.history.pushState(tempCanvas, null);
-    // },
+
     back() {
       if (this.tempCanvasIndex <= 0) {
         console.log(this.tempCanvasIndex);
@@ -362,16 +355,10 @@ export default {
       });
 
       canvas.addEventListener("mousemove", (e) => {
-        // let currentPos = this.getCanvasMousePosition(e.offsetX,e.offsetY)
-        //               let tempx = this.tempPositionSquare.x
-        //               let tempy = this.tempPositionSquare.y
-        //               let width = currentPos.x - tempx
-        //               let height = currentPos.y - tempy
         const ctx = canvas.getContext("2d");
         if (this.isDrawing == true) {
           if (this.isPencil == true) {
-            if (this.isCanvasMouseDown == true) {
-              
+            if (this.isCanvasMouseDown == true) {              
 
               switch (this.currentTool) {
                 case "paint-brush":
@@ -457,8 +444,6 @@ export default {
             }
           }
         }
-        // if(this.currentTool=='square'&& this.isCanvasMouseDown)return
-        // this.setCanvasTempPositionSquare(currentPos.x,currentPos.y)
       });
     },
     setCanvas() {
@@ -490,7 +475,6 @@ export default {
   mounted() {
     this.setCanvas();
     this.currentColor = this.colors[0];
-    // this.currentColor = this.color[0];
     this.setWindowEvent();
   },
 };
