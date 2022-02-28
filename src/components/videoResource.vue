@@ -1,43 +1,34 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-sm navbar-light px-2">
     <div class="logo">
-        <img src="../assets/LOGO_210623.jpg" alt="">
-    </div>
-    <div class="col-6">
-        <input
-          type="radio"
-          class="btn-check"
-          name="btnradio"
-          id="btnradio1"
-          autocomplete="off"
-          @click="videoMain()"          
-        />
-        <label class="btn btn-outline-primary m-3" for="btnradio1">互動講義</label>
-        
-        <input
-          type="radio"
-          class="btn-check"
-          name="btnradio"
-          id="btnradio2"
-          autocomplete="off"
-          @click="videoResource()" 
-          checked         
-        />
-        <label class="btn btn-outline-primary m-3" for="btnradio2" >素材總管</label>
-        <input
-          type="radio"
-          class="btn-check"
-          name="btnradio"
-          id="btnradio4"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-primary m-3" for="btnradio4">支援服務</label>
-      <!-- </div> -->
-    </div>
-    <div class="col-4">
-      <button type="button" class="btn btn-outline-dark m-2" @click="videoMemberplace()">會員專區</button>
-      <button type="button" class="btn btn-outline-dark m-2">登出</button>
-    </div>
+      <img src="../assets/LOGO_210623.jpg" alt="" />
+    </div>    
+    <ul class="navbar-nav ms-auto mb-lg-0">
+      <li class="nav-item">
+        <router-link
+          to="/videoMain/videolist_handout"
+          id="prevent_header"
+          class="m-3"
+          >互動講義</router-link
+        >
+      </li>
+      <li class="nav-item">
+        <router-link to="/videoResource" id="prevent_header" class="m-3"
+          >素材總管</router-link
+        >
+      </li>
+      <li class="nav-item">
+        <router-link
+          to="/videoMemberplace/videoEditinfo"
+          id="prevent_header"
+          class="m-3"
+          >會員中心</router-link
+        >
+      </li>
+      <li class="nav-item">
+        <router-link to="/" id="prevent_header" class="m-3">登出</router-link>
+      </li>
+    </ul> 
   </nav>
   <div class="container">
   <div class="mt-5">

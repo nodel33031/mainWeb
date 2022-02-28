@@ -10,12 +10,14 @@ const routes = [
   {
     path: "/videoMain",
     name: "videoMain",
+    // alias:"/",
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/videoMain.vue"),
     children: [
       {
         path: "videolist_handout",
         name: "videolist_handout",
+        // alias:"/videoMain",
         components: {
           videolist_handout: () =>
             import("../components/videolist_handout.vue"),
@@ -69,6 +71,7 @@ const routes = [
   {
     path: "/qrcodeMain",
     name: "qrcodeMain",
+    
     component: () => import("../components/qrcodeMain.vue"),
   },
   {
@@ -95,14 +98,14 @@ const routes = [
   {
     path: "/videoMemberplace",
     name: "videoMemberplace",
-    alias: '/d',
+    alias: '/',
     component: () => 
       import("../components/videoMemberplace.vue"),
     children: [
       {
         path: "videoOrganization",
         name: "videoOrganization",
-        alias: '/a',
+        alias: '/',
         components: {
           videoOrganization: () =>
             import("../components/videoOrganization.vue"),
@@ -111,7 +114,7 @@ const routes = [
       {
         path: "videoEditinfo",
         name: "videoEditinfo",
-        alias: '/d',
+        alias: '/',
         components: {
           videoEditinfo: () =>
             import("../components/videoEditinfo.vue"),
@@ -120,7 +123,7 @@ const routes = [
       {
         path: "videoChangepassword",
         name: "videoChangepassword",
-        alias: '/d',
+        alias: '/',
         components: {
           videoChangepassword: () =>
             import("../components/videoChangepassword.vue"),

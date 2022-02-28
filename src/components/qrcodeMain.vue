@@ -136,14 +136,11 @@
             </tr>
           </tbody>
         </table>
-        <div style="text-align:left">
-
-        
+        <div style="text-align:left">        
         <button
           type="button"
           v-on:click="addlist()"
-          class="btn btn-primary me-2 "    
-          
+          class="btn btn-primary me-2 "  
         >
           增加
         </button>
