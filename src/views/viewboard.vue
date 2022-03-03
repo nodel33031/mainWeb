@@ -95,7 +95,7 @@
       >
         <i class="fas fa-eraser" style="width: 100px">橡皮擦</i>
       </button>
-      <button
+      <!-- <button
         class="squareMode"
         @click="
           currentTool = 'square';
@@ -103,7 +103,7 @@
         "
       >
         <i class="fas fa-square" style="width: 100px">方形框</i>
-      </button>
+      </button> -->
       <div class="page" style="color: white">
         {{ pageNum }}/{{ pageTotalNum }}
       </div>
@@ -262,9 +262,9 @@ export default {
     //   let y = offsetY - canvasPosition.y;
     //   return { x, y };
     // },
-    aaa(){
-      document.getElementById("boardHeader").style.display = "none";
-    },
+    // controlHeader(){
+    //   document.getElementById("boardHeader").style.display = "none";
+    // },
     onCanvasMouseDown() {
       this.isCanvasMouseDown = true;
       // this.setTempSquare();
