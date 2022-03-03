@@ -44,7 +44,7 @@ export default {
 .container {
   max-width: 1624px;
   margin: auto;
-  padding: 40px 5%;
+  // padding: 40px 5%;
 }
 .btnBlue {
   background: #fff;

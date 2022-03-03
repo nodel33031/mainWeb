@@ -62,7 +62,6 @@
       </div>
     </div>
   </div>
-
   <div class="container">
     <router-view name="videolist_handout"></router-view>
     <router-view name="videolist_garbage"></router-view>

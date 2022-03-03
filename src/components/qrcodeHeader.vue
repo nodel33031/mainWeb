@@ -3,7 +3,8 @@
         <img src="../assets/LOGO_210623.jpg" alt="">
     <div id="nav">
         <router-link to="/qrcodeMain">QRcode產生器</router-link> |
-        <router-link to="/qrcodeMain2">影片管理系統</router-link> |        
+        <router-link to="/qrcodeMain2">影片管理系統</router-link> |
+        <router-link to="/" >登出</router-link>        
     </div>        
     </div>
 

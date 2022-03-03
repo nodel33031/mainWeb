@@ -1,5 +1,7 @@
-<template>
-  <div>
+<template> 
+    <div :class="{hideNav}" >
+      <videoHeader /> 
+    </div>         
     <canvas
       @mousedown="onCanvasMouseDown()"
       @mouseup="onCanvasMouseUp()"
@@ -23,6 +25,9 @@
     </pdf>
     <div class="tools" :class="{ hideNavBar }" style="z-index: 5">
       <div class="btn right" @click="hideNavBar = !hideNavBar"></div>
+      <button @click="hideNav = !hideNav">        
+        <i class="fa fa-arrows" style="width: 100px">介面控制</i>
+      </button>
       <button
         :theme="'default'"
         type="submit"
@@ -99,10 +104,6 @@
       >
         <i class="fas fa-square" style="width: 100px">方形框</i>
       </button>
-      <!-- <button>
-        <i class="fas fa-desktop">全螢幕</i>
-      </button> -->
-      <!-- <button @click="getCanvasMousePosition()">555555</button> -->
       <div class="page" style="color: white">
         {{ pageNum }}/{{ pageTotalNum }}
       </div>
@@ -136,18 +137,21 @@
         ></i>
       </div>
     </div>
-  </div>
+  
 </template>
 <style lang="less" src="./viewBoard.less"></style>
 <script>
+import videoHeader from "../components/videoMain.vue";
 import pdf from "vue3-pdf";
 export default {
   name: "viewboard",
   components: {
     pdf,
+    videoHeader
   },
   data() {
     return {
+      hideNav:false,
       backgroundColor: "#dfdfdf",
       isMenuOpen: true,
       isDrawing: false,
@@ -258,6 +262,9 @@ export default {
     //   let y = offsetY - canvasPosition.y;
     //   return { x, y };
     // },
+    aaa(){
+      document.getElementById("boardHeader").style.display = "none";
+    },
     onCanvasMouseDown() {
       this.isCanvasMouseDown = true;
       // this.setTempSquare();

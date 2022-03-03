@@ -30,88 +30,75 @@
       </li>
     </ul> 
   </nav>
+  <div class="bg-light px-3" style="height:59px"></div>
   <div class="container">
-  <div class="mt-5">
-    <div class="col-4 ms-5">
-    <form class="d-flex">
+  <div style="position: static; text-align: right; " class="my-2">
       <input
+        type="text"
         class="form-control"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
+        placeholder="講義名稱"
+        aria-label="Recipient's username"
+        aria-describedby="button-addon2"
+        style="display:inline-block;max-width:20rem"
       />
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        id="button-addon2"
+        @click="setDatabase()"
+      >
+        查詢
+      </button>
+      <div style="min-width:150px;display:inline-block">
+      
+    <div class="btn btnBlue mx-2">建立目錄</div>
+    <div class="btn btnBlue">上傳講義</div>
+      </div>
   </div>
-  <div class="col-8 " >
-    <button
-      class="btn btn-outline-success me-2"
-      style="position: relative; top: -40px; left: 600px"
-    >
-      建立目錄
-    </button>
-    <button
-      class="btn btn-outline-success"
-      style="position: relative; top: -40px; left: 600px"
-    >
-      上傳講義
-    </button>
-  </div>
-  </div>
-  </div>
-  <div class="container">
-    <div class="row" style="background-color:lightgreen">
-      <div class="col-1">
-        <p></p>
-      </div>
-      <div class="col-2">
-        <p>講義名稱</p>
-      </div>
-      <div class="col-1">
-        <p>大小</p>
-      </div>
-      <div class="col-2">
-        <p>附加檔案</p>
-      </div>
-      <div class="col-2">
-        <p>講義備課</p>
-      </div>
-      <div class="col-2">
-        <p>線上使用</p>
-      </div>
-      <div class="col-2">
-        <p>其他功能</p>
-      </div>
+  <div class="row bg-light">
+    <div class="col-1">
+      <p></p>
     </div>
-    <div
-      class="row"
-      v-for="item in database"
-      :key="item.id"
-      style="cursor:pointer"
-    >
-      <div class="col-1">
-        <p>{{item.rank}}</p>
-      </div>
-      <div class="col-2">
-        <p>{{item.city}}</p>
-      </div>
-      <div class="col-1">
-        <p>{{item.state}}</p>
-      </div>
-      <div class="col-2">
-        <p>{{item.state}}</p>
-      </div>
-      <div class="col-2">
-        <p>{{item.state}}</p>
-      </div>
-      <div class="col-2">
-        <p>{{item.state}}</p>
-      </div>
-      <div class="col-2">
-        <p>{{item.state}}</p>
-      </div>
+    <div class="col-3">
+      <div class="py-3">講義名稱</div>
+    </div>
+    <div class="col-1">
+      <div class="py-3">大小</div>
+    </div>
+    <div class="col-4">
+      <div class="py-3">線上使用</div>
+    </div>
+    <div class="col-2">
+      <div class="py-3">其他功能</div>
     </div>
   </div>
+  <div
+    class="row"
+    v-for="item in database"
+    :key="item.id"
+    style="cursor: pointer"
+  >
+    <div class="col-1">
+      <!-- <p>{{ item.fileName }}</p> -->      
+    </div>
+    <div class="col-1 p-1"> 
+      <!-- <img src="../assets/png.png" style="width:40px;height:40px" alt=""> -->
+      <img :src="setDatabase(item.directory,item.fileName)" style="width:40px;height:40px" alt="">
+    </div>
+    <div class="col-2 p-1">      
+      <p>{{ item.fileName }}</p>        
+    </div>
+    <div class="col-1 p-1">
+      <!-- <p>{{ item.state }}</p> -->
+    </div>
+    <div class="col-4 p-1">
+      <!-- <p>{{ item.state }}</p> -->
+    </div>
+    <div class="col-2 p-1">
+      <!-- <p>{{ item.state }}</p> -->
+    </div>
+  </div>
+  </div> 
 </template>
 <script>
 export default {
@@ -133,11 +120,38 @@ export default {
     },
 }
 </script>
-<style >
+<style lang="less">
+.btnBlue {
+  background: #fff;
+  color: #1b1f71;
+  border: 2px solid #1b1f71;
+  &:hover {
+    border: 2px solid #1b1f71;
+    border-radius: 5px;
+    background: #1b1f71;
+    color: #fff;    
+    
+  }
+}
 .logo img{ 
     /* width:100%; */
     height: 80px;
     margin: 15px;
 }
+#prevent_header {
+  text-decoration: none;
+  color: #1b1f71;
+  font-weight: 600;
+  font-size: 18px;
+  background-image: linear-gradient(#00174d, #e6e6e6);
+  background-position: left bottom;
+  background-size: 0 2.5px;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s;
+  &:hover {
+    background-size: 100% 2.5px;
+  }
+}
+
   
 </style>
