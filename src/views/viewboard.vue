@@ -17,15 +17,15 @@
       :page="pageNum"
       :rotate="pageRotate"
       @progress="loadedRatio = $event"
-      @page-loaded="pageLoaded($event)"
-      @num-pages="pageTotalNum = $event"
+      @page-loaded="currentPage = $event"
+      @num-pages="pageCount = $event"
       @error="pdfError($event)"
       @link-clicked="page = $event"
     >
     </pdf>
     <div class="tools" :class="{ hideNavBar }" style="z-index: 5">
       <div class="btn right" @click="hideNavBar = !hideNavBar"></div>
-      <button @click="hideNav = !hideNav">        
+      <button @click="hideNav = !hideNav" class="p-2">        
         <i class="fa fa-arrows" style="width: 100px">介面控制</i>
       </button>
       <button
@@ -33,7 +33,7 @@
         type="submit"
         :title="'基礎按鈕'"
         @click.stop="prePage"
-        class="mr10"
+        class="mr10 p-2"
       >
         <i class="fa fa-arrow-left" style="width: 100px">上一頁</i>
       </button>
@@ -42,25 +42,25 @@
         type="submit"
         :title="'基礎按鈕'"
         @click.stop="nextPage"
-        class="mr10"
+        class="mr10 p-2"
       >
         <i class="fa fa-arrow-right" style="width: 100px">下一頁</i>
       </button>
-      <button @click="resetCanvas()">
-        <i class="fa fa-chalkboard" style="width: 100px">清除</i>
+      <button @click="resetCanvas()" class="p-2">
+        <i class="fa fa-chalkboard " style="width: 100px">清除</i>
       </button>
-      <button @click="back()">
+      <button @click="back()" class="p-2">
         <i class="fa fa-undo" style="width: 100px"> 恢復</i>
       </button>
-      <button>
+      <button class="p-2"> 
         <i
-          class="fas fa-palette"
+          class="fas fa-palette "
           style="width: 100px"
           @click="hideNavBar_color = !hideNavBar_color"
           >色彩選擇</i
         >
       </button>
-      <button>
+      <button class="p-2">
         <i
           class="fas fa-bold"
           style="width: 100px"
@@ -69,7 +69,7 @@
         >
       </button>
       <button
-        class="penMode"
+        class="penMode p-2"
         @click="
           currentTool = 'paint-brush';
           changePaint();
@@ -78,7 +78,7 @@
         <i class="fas fa-pen" style="width: 100px">畫筆模式</i>
       </button>
       <button
-        class="highlighterMode"
+        class="highlighterMode p-2"
         @click="
           currentTool = 'highlighter';
           changeHighlighter();
@@ -87,7 +87,7 @@
         <i class="fas fa-pen-alt" style="width: 100px">螢光筆模式</i>
       </button>
       <button
-        class="eraserMode"
+        class="eraserMode p-2"
         @click="
           currentTool = 'eraser';
           changeEraser();
@@ -105,7 +105,7 @@
         <i class="fas fa-square" style="width: 100px">方形框</i>
       </button> -->
       <div class="page" style="color: white">
-        {{ pageNum }}/{{ pageTotalNum }}
+        {{ pageNum }}
       </div>
     </div>
     <div class="toolbar_color" :class="{ hideNavBar_color }" style="z-index: 5">
@@ -150,7 +150,7 @@ export default {
     videoHeader
   },
   data() {
-    return {
+    return {      
       hideNav:false,
       backgroundColor: "#dfdfdf",
       isMenuOpen: true,
@@ -239,8 +239,7 @@ export default {
       pageTotalNum: 14,
       pageRotate: 0,
       // 加載進度
-      loadedRatio: 0,
-      curPageNum: 0,
+      loadedRatio: 0,      
       tempSquare: null, 
       tempPositionSquare:null     
     };
@@ -266,9 +265,10 @@ export default {
     },
     onCanvasMouseDown() {
       this.isCanvasMouseDown = true;
-      // this.setTempSquare();
+      // console.log('5555');
     },
     onCanvasMouseUp() {
+      console.log(this.pageTotalNum);
       this.isCanvasMouseDown = false;
       let ctx = this.canvasContext;
       let canvas = ctx.canvas;
@@ -313,30 +313,30 @@ export default {
       this.currentTool = "highlighter";
       document.querySelector(".penMode").style.color = "black";
       document.querySelector(".eraserMode").style.color = "black";
-      document.querySelector(".squareMode").style.color = "black";
+      // document.querySelector(".squareMode").style.color = "black";
       document.querySelector(".highlighterMode").style.color = "green";
     },
     changePaint() {
       this.currentTool = "paint-brush";
       document.querySelector(".penMode").style.color = "green";
       document.querySelector(".eraserMode").style.color = "black";
-      document.querySelector(".squareMode").style.color = "black";
+      // document.querySelector(".squareMode").style.color = "black";
       document.querySelector(".highlighterMode").style.color = "black";
     },
     changeEraser() {
       this.currentTool = "eraser";
       document.querySelector(".penMode").style.color = "black";
       document.querySelector(".eraserMode").style.color = "green";
-      document.querySelector(".squareMode").style.color = "black";
+      // document.querySelector(".squareMode").style.color = "black";
       document.querySelector(".highlighterMode").style.color = "black";
     },
-    changeSquare() {
-      this.currentTool = "square";
-      document.querySelector(".penMode").style.color = "black";
-      document.querySelector(".eraserMode").style.color = "black";
-      document.querySelector(".squareMode").style.color = "green";
-      document.querySelector(".highlighterMode").style.color = "black";
-    },
+    // changeSquare() {
+    //   this.currentTool = "square";
+    //   document.querySelector(".penMode").style.color = "black";
+    //   document.querySelector(".eraserMode").style.color = "black";
+    //   document.querySelector(".squareMode").style.color = "green";
+    //   document.querySelector(".highlighterMode").style.color = "black";
+    // },
     isColorActive(color) {
       return this.currentColor && color == this.currentColor.name
         ? " active"
@@ -466,12 +466,14 @@ export default {
       var page = this.pageNum;
       page = page > 1 ? page - 1 : this.pageTotalNum;
       this.pageNum = page;
+      this.resetCanvas()
     },
     // 下一頁函數
     nextPage() {
       var page = this.pageNum;
       page = page < this.pageTotalNum ? page + 1 : 1;
       this.pageNum = page;
+      this.resetCanvas()
     },
     // 其他的一些回調函數。
     pdfError(error) {

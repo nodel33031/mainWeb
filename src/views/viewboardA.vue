@@ -10,8 +10,8 @@
     <pdf
       v-for="i in numPages"
       :key="i"
-      :src="src"
       :page="i"
+      :src="src"      
       style="display: inline-block; width: 100%"      
     ></pdf>
     <div class="tools" :class="{ hideNavBar }" style="z-index: 5">
@@ -234,9 +234,9 @@ export default {
     },
     onCanvasMouseDown() {
       this.isCanvasMouseDown = true;
-      // this.setTempSquare();
+      // console.log('555');
     },
-    onCanvasMouseUp() {
+    onCanvasMouseUp() {      
       this.isCanvasMouseDown = false;
       let ctx = this.canvasContext;
       let canvas = ctx.canvas;
@@ -267,20 +267,21 @@ export default {
     },
     setCanvas() {
       let canvas = document.querySelector("#testcanvas");
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 2.5;
+      canvas.width = window.innerWidth;      
+      canvas.height = window.innerHeight * 2.5 ;
       let ctx = canvas.getContext("2d");
       this.canvasContext = ctx;
       console.log("顯示ctx", ctx);
     },
     setWindowEvent() {
-      const canvas = document.querySelector("#testcanvas");
-      console.log(pdf);
+      const canvas = document.querySelector("#testcanvas");      
       canvas.addEventListener("mousedown", (e) => {
         this.isDrawing = true;
         this.lastX = e.offsetX;
         this.lastY = e.offsetY;
         console.log(this.lastX, this.lastY);
+        // console.log(this.numPages);
+        // canvas.height = window.innerHeight * 2.5 * this.numPages;
       });
 
       canvas.addEventListener("mouseup", () => {
@@ -297,7 +298,7 @@ export default {
           if (this.isPencil == true) {
             if (this.isCanvasMouseDown == true) {
               switch (this.currentTool) {
-                case "paint-brush":
+                case "paint-brush":                  
                   ctx.globalCompositeOperation = "source-over";
                   ctx.globalAlpha = 1;
                   ctx.strokeStyle = this.currentColor.code;
@@ -390,6 +391,8 @@ export default {
     this.src.promise.then((pdf) => {
       this.numPages = pdf.numPages;
     });
+    
+    
   },
 };
 </script>
