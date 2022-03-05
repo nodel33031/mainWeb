@@ -2,6 +2,12 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
+    path: "/viewboardA",
+    name: "viewboardA",    
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/viewboardA.vue"),
+  },
+  {
     path: "/videoHeader",
     name: "videoheader",
     component: () =>

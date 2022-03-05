@@ -1,7 +1,5 @@
-<template> 
-    <div :class="{hideNav}" >
-      <videoHeader /> 
-    </div>         
+<template>
+  <div>
     <canvas
       @mousedown="onCanvasMouseDown()"
       @mouseup="onCanvasMouseUp()"
@@ -9,42 +7,17 @@
       style="z-index: 2; position: absolute; left: 0; width: 100%"
     >
     </canvas>
-    <!-- 這不一定要用ref -->
     <pdf
-      ref="pdf"
-      id="pdf"
-      :src="url"
-      :page="pageNum"
-      :rotate="pageRotate"
-      @progress="loadedRatio = $event"
-      @page-loaded="pageLoaded($event)"
-      @num-pages="pageTotalNum = $event"
-      @error="pdfError($event)"
-      @link-clicked="page = $event"
-    >
-    </pdf>
+      v-for="i in numPages"
+      :key="i"
+      :src="src"
+      :page="i"
+      style="display: inline-block; width: 100%"      
+    ></pdf>
     <div class="tools" :class="{ hideNavBar }" style="z-index: 5">
       <div class="btn right" @click="hideNavBar = !hideNavBar"></div>
-      <button @click="hideNav = !hideNav">        
+      <button @click="hideNav = !hideNav">
         <i class="fa fa-arrows" style="width: 100px">介面控制</i>
-      </button>
-      <button
-        :theme="'default'"
-        type="submit"
-        :title="'基礎按鈕'"
-        @click.stop="prePage"
-        class="mr10"
-      >
-        <i class="fa fa-arrow-left" style="width: 100px">上一頁</i>
-      </button>
-      <button
-        :theme="'default'"
-        type="submit"
-        :title="'基礎按鈕'"
-        @click.stop="nextPage"
-        class="mr10"
-      >
-        <i class="fa fa-arrow-right" style="width: 100px">下一頁</i>
       </button>
       <button @click="resetCanvas()">
         <i class="fa fa-chalkboard" style="width: 100px">清除</i>
@@ -95,20 +68,8 @@
       >
         <i class="fas fa-eraser" style="width: 100px">橡皮擦</i>
       </button>
-      <!-- <button
-        class="squareMode"
-        @click="
-          currentTool = 'square';
-          changeSquare();
-        "
-      >
-        <i class="fas fa-square" style="width: 100px">方形框</i>
-      </button> -->
-      <div class="page" style="color: white">
-        {{ pageNum }}/{{ pageTotalNum }}
-      </div>
     </div>
-    <div class="toolbar_color" :class="{ hideNavBar_color }" style="z-index: 5">
+        <div class="toolbar_color" :class="{ hideNavBar_color }" style="z-index: 5">
       <div class="div_span">
         <span @click="hideNavBar_color = !hideNavBar_color">╳</span>
       </div>
@@ -137,21 +98,25 @@
         ></i>
       </div>
     </div>
-  
+  </div>
 </template>
 <style lang="less" src="./viewBoard.less"></style>
 <script>
-import videoHeader from "../components/videoMain.vue";
 import pdf from "vue3-pdf";
+
+var loadingTask = pdf.createLoadingTask(
+  "https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf"
+);
+
 export default {
-  name: "viewboard",
   components: {
     pdf,
-    videoHeader
   },
   data() {
     return {
-      hideNav:false,
+      src: loadingTask,
+      numPages: undefined,
+      hideNav: false,
       backgroundColor: "#dfdfdf",
       isMenuOpen: true,
       isDrawing: false,
@@ -164,7 +129,7 @@ export default {
       hideNavBar_color: true,
       hideNavBar_bold: true,
       textSize: 10,
-      canvasContext: null,      
+      canvasContext: null,
       tempCanvas: [],
       tempCanvasIndex: -1,
       isCanvasMouseDown: false,
@@ -233,59 +198,17 @@ export default {
       ],
       currentColor: null,
       currentTool: "paint-brush",
-      //pdf資料
-      url: "https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf",
-      pageNum: 1,
-      pageTotalNum: 14,
-      pageRotate: 0,
-      // 加載進度
-      loadedRatio: 0,
-      curPageNum: 0,
-      tempSquare: null, 
-      tempPositionSquare:null     
+      
+
     };
   },
   methods: {
-    // setCanvasTempPositionSquare(x,y){
-    //   this.tempPositionSquare={x,y}
-    // },
-    // setTempSquare() {
-    //   let ctx = this.canvasContext;
-    //   let canvas = ctx.canvas;
-    //   let tempSquare = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    //   this.tempSquare = tempSquare;
-    // },
-    // getCanvasMousePosition(offsetX, offsetY) {
-    //   let canvasPosition = this.canvasContext.canvas.getBoundingClientRect();
-    //   let x = offsetX - canvasPosition.x;
-    //   let y = offsetY - canvasPosition.y;
-    //   return { x, y };
-    // },
-    controlHeader(){
-      document.getElementById("boardHeader").style.display = "none";
+
+    isColorActive(color) {
+      return this.currentColor && color == this.currentColor.name
+        ? " active"
+        : "";
     },
-    onCanvasMouseDown() {
-      this.isCanvasMouseDown = true;
-      // this.setTempSquare();
-    },
-    onCanvasMouseUp() {
-      this.isCanvasMouseDown = false;
-      let ctx = this.canvasContext;
-      let canvas = ctx.canvas;
-      this.tempCanvas.push(
-        this.canvasContext.getImageData(0, 0, canvas.width, canvas.height)
-      );
-      this.tempCanvasIndex += 1;
-      let tempSquare = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      window.history.pushState(tempSquare, null);
-    },
-    // setTempCanvas() {
-    //   let ctx = this.canvasContext;
-    //   let canvas = ctx.canvas;
-    //   let tempCanvas = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    //   this.tempCanvas = tempCanvas;
-    //   console.log(tempCanvas);
-    // },
     resetCanvas() {
       let canvas = this.canvasContext.canvas;
       this.canvasContext.clearRect(0, 0, canvas.width, canvas.height);
@@ -309,38 +232,46 @@ export default {
         );
       }
     },
+    onCanvasMouseDown() {
+      this.isCanvasMouseDown = true;
+      // this.setTempSquare();
+    },
+    onCanvasMouseUp() {
+      this.isCanvasMouseDown = false;
+      let ctx = this.canvasContext;
+      let canvas = ctx.canvas;
+      this.tempCanvas.push(
+        this.canvasContext.getImageData(0, 0, canvas.width, canvas.height)
+      );
+      this.tempCanvasIndex += 1;
+      let tempSquare = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      window.history.pushState(tempSquare, null);
+    },
     changeHighlighter() {
       this.currentTool = "highlighter";
       document.querySelector(".penMode").style.color = "black";
-      document.querySelector(".eraserMode").style.color = "black";
-      document.querySelector(".squareMode").style.color = "black";
-      document.querySelector(".highlighterMode").style.color = "green";
+      document.querySelector(".eraserMode").style.color = "black";    
+      document.querySelector(".highlighterMode").style.color = "green";      
     },
     changePaint() {
       this.currentTool = "paint-brush";
       document.querySelector(".penMode").style.color = "green";
-      document.querySelector(".eraserMode").style.color = "black";
-      document.querySelector(".squareMode").style.color = "black";
+      document.querySelector(".eraserMode").style.color = "black";    
       document.querySelector(".highlighterMode").style.color = "black";
     },
     changeEraser() {
       this.currentTool = "eraser";
       document.querySelector(".penMode").style.color = "black";
-      document.querySelector(".eraserMode").style.color = "green";
-      document.querySelector(".squareMode").style.color = "black";
+      document.querySelector(".eraserMode").style.color = "green";    
       document.querySelector(".highlighterMode").style.color = "black";
     },
-    changeSquare() {
-      this.currentTool = "square";
-      document.querySelector(".penMode").style.color = "black";
-      document.querySelector(".eraserMode").style.color = "black";
-      document.querySelector(".squareMode").style.color = "green";
-      document.querySelector(".highlighterMode").style.color = "black";
-    },
-    isColorActive(color) {
-      return this.currentColor && color == this.currentColor.name
-        ? " active"
-        : "";
+    setCanvas() {
+      let canvas = document.querySelector("#testcanvas");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight * 2.5;
+      let ctx = canvas.getContext("2d");
+      this.canvasContext = ctx;
+      console.log("顯示ctx", ctx);
     },
     setWindowEvent() {
       const canvas = document.querySelector("#testcanvas");
@@ -364,8 +295,7 @@ export default {
         const ctx = canvas.getContext("2d");
         if (this.isDrawing == true) {
           if (this.isPencil == true) {
-            if (this.isCanvasMouseDown == true) {              
-
+            if (this.isCanvasMouseDown == true) {
               switch (this.currentTool) {
                 case "paint-brush":
                   ctx.globalCompositeOperation = "source-over";
@@ -428,7 +358,7 @@ export default {
                   // ctx.lineJoin = "round";
                   // ctx.lineCap = "round";
                   // ctx.lineWidth = this.textSize * 3;
-                  // ctx.rect(500,500,500,500);                  
+                  // ctx.rect(500,500,500,500);
                   // ctx.stroke();
                   // ctx.globalCompositeOperation = "source-over";
                   // ctx.globalAlpha = 1;
@@ -443,8 +373,8 @@ export default {
                   // ctx.lineTo(e.offsetX, e.offsetY);
                   // 上面都是在規劃路徑, 這裡才是將線畫出來
                   // ctx.stroke();
-                      // ctx.putImageData(this.tempSquare,0, 0)                      
-                      // ctx.rect(tempx, tempy, width, height);
+                  // ctx.putImageData(this.tempSquare,0, 0)
+                  // ctx.rect(tempx, tempy, width, height);
                   break;
               }
             }
@@ -452,36 +382,14 @@ export default {
         }
       });
     },
-    setCanvas() {
-      let canvas = document.querySelector("#testcanvas");
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 2.5;
-      let ctx = canvas.getContext("2d");
-      this.canvasContext = ctx;
-      console.log("顯示ctx", ctx);
-    },
-    ////////////////////////////////////////////////////
-    // 上一頁函數，
-    prePage() {
-      var page = this.pageNum;
-      page = page > 1 ? page - 1 : this.pageTotalNum;
-      this.pageNum = page;
-    },
-    // 下一頁函數
-    nextPage() {
-      var page = this.pageNum;
-      page = page < this.pageTotalNum ? page + 1 : 1;
-      this.pageNum = page;
-    },
-    // 其他的一些回調函數。
-    pdfError(error) {
-      console.error(error);
-    },
   },
   mounted() {
     this.setCanvas();
     this.currentColor = this.colors[0];
     this.setWindowEvent();
+    this.src.promise.then((pdf) => {
+      this.numPages = pdf.numPages;
+    });
   },
 };
 </script>
