@@ -107,7 +107,7 @@
                 <button
                   class="btn btn-outline-danger btn-sm"
                   style="margin-top: 5px"
-                  @click="removeTodo()"
+                  @click="removeTodo(index)"
                 >
                   刪除
                 </button>
@@ -240,8 +240,8 @@ export default {
         });
     },
     // 刪除
-    removeTodo() {
-      //   this.datasource.splice(key, 1);
+    removeTodo(index) {
+        this.datasource.splice(index, 1);
       alert("待修改");
     },
     emitfileName(data, Index) {
