@@ -62,7 +62,7 @@
       <!-- <p>{{ item.fileName }}</p> -->
     </div>
     <div class="col-1 p-1">
-      <!-- <img src="../assets/file.jpg" style="width:40px;height:40px" alt=""> -->
+      <!-- <img src="../assets/jpg.png" style="width:40px;height:40px" alt=""> -->
       <img
         :src="setDatabase(item.directory, item.fileName)"
         style="width: 40px; height: 40px"

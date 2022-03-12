@@ -69,28 +69,24 @@
         >
       </button>
       <button
-        class="penMode p-2"
-        @click="
-          currentTool = 'paint-brush';
-          changePaint();
-        "
+         class="p-2"
+        :class="{'text-success':currentTool=='paint-brush'}"        
+        @click="currentTool = 'paint-brush'; "
       >
         <i class="fas fa-pen" style="width: 100px">畫筆模式</i>
       </button>
       <button
-        class="highlighterMode p-2"
-        @click="
-          currentTool = 'highlighter';
-          changeHighlighter();
-        "
+         class="p-2"
+        :class="{'text-success':currentTool=='highlighter'}"        
+        @click="currentTool = 'highlighter'; "
       >
         <i class="fas fa-pen-alt" style="width: 100px">螢光筆模式</i>
       </button>
       <button
-        class="eraserMode p-2"
+         class="p-2"
+        :class="{'text-success':currentTool=='eraser'}"        
         @click="
           currentTool = 'eraser';
-          changeEraser();
         "
       >
         <i class="fas fa-eraser" style="width: 100px">橡皮擦</i>
@@ -276,8 +272,8 @@ export default {
         this.canvasContext.getImageData(0, 0, canvas.width, canvas.height)
       );
       this.tempCanvasIndex += 1;
-      let tempSquare = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      window.history.pushState(tempSquare, null);
+      // let tempSquare = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      // window.history.pushState(tempSquare, null);
     },
     // setTempCanvas() {
     //   let ctx = this.canvasContext;
@@ -309,34 +305,7 @@ export default {
         );
       }
     },
-    changeHighlighter() {
-      this.currentTool = "highlighter";
-      document.querySelector(".penMode").style.color = "black";
-      document.querySelector(".eraserMode").style.color = "black";
-      // document.querySelector(".squareMode").style.color = "black";
-      document.querySelector(".highlighterMode").style.color = "green";
-    },
-    changePaint() {
-      this.currentTool = "paint-brush";
-      document.querySelector(".penMode").style.color = "green";
-      document.querySelector(".eraserMode").style.color = "black";
-      // document.querySelector(".squareMode").style.color = "black";
-      document.querySelector(".highlighterMode").style.color = "black";
-    },
-    changeEraser() {
-      this.currentTool = "eraser";
-      document.querySelector(".penMode").style.color = "black";
-      document.querySelector(".eraserMode").style.color = "green";
-      // document.querySelector(".squareMode").style.color = "black";
-      document.querySelector(".highlighterMode").style.color = "black";
-    },
-    // changeSquare() {
-    //   this.currentTool = "square";
-    //   document.querySelector(".penMode").style.color = "black";
-    //   document.querySelector(".eraserMode").style.color = "black";
-    //   document.querySelector(".squareMode").style.color = "green";
-    //   document.querySelector(".highlighterMode").style.color = "black";
-    // },
+
     isColorActive(color) {
       return this.currentColor && color == this.currentColor.name
         ? " active"
