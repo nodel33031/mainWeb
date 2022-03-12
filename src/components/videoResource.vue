@@ -47,7 +47,7 @@
         id="button-addon2"
         @click="setDatabase()"
       >
-        查詢
+        <i class="fa fa-search"></i>
       </button>
       <div style="min-width:150px;display:inline-block">
       
@@ -84,6 +84,7 @@
     <div class="col-1 p-1"> 
       <!-- <img src="../assets/png.png" style="width:40px;height:40px" alt=""> -->
       <img :src="setDatabase(item.directory,item.fileName)" style="width:40px;height:40px" alt="">
+      <div class="circular" v-bind:style="{ backgroundImage: 'url(' + setDatabase(item.directory, item.fileName) + ')' }"></div>
     </div>
     <div class="col-2 p-1">      
       <p>{{ item.fileName }}</p>        

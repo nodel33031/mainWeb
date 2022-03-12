@@ -1,6 +1,7 @@
 <template>
   <Header></Header>
   <Searchmodal v-on:sureMovie="emitMain"></Searchmodal>
+  <form action="" >
   <div class="container" style="padding-bottom:12rem">
     <div class="row">
       <div class="col">
@@ -35,7 +36,7 @@
         </div>
         <div class="">
           <input
-            class="w-100 main1input"
+            class="w-100 main1input form_data1"
             id="input_text"
             name="input_text"
             type="text"
@@ -45,7 +46,7 @@
           <h2 class="py-3">播放清單名稱</h2>
           <input
             id="playlist_name"
-            class="w-100 main1input"
+            class="w-100 main1input form_data"
             name="playlist_name"
             type="text"
             placeholder="請輸入播放清單名稱(可不填)"
@@ -87,9 +88,9 @@
             <tr v-for="(item, i) in products" :key="item.id">
               <td>
                 <input
-                  class="qrcodeformstyle1 main1input"
-                  id="newVideoOrder1"
-                  name="newVideoOrder1"
+                  class="qrcodeformstyle1 main1input form_data"
+                  id="videoOrder"
+                  name="videoOrder"
                   type="text"
                   placeholder="順序"
                   :value="i + 1"
@@ -97,27 +98,27 @@
               </td>
               <td>
                 <input
-                  class="qrcodeformstyle main1input"
-                  id="newVideoName1"
-                  name="newVideoName1"
+                  class="qrcodeformstyle main1input form_data"
+                  id="videoName"
+                  name="videoName"
                   type="text"
                   placeholder="請輸入影片名稱"
                 />
               </td>
               <td>
                 <input
-                  class="qrcodeformstyle main1input"
-                  id="newVideoName1"
-                  name="newVideoName1"
+                  class="qrcodeformstyle main1input form_data"
+                  id="videoTitle"
+                  name="videoTitle"
                   type="text"
                   placeholder="請輸入影片題目"
                 />
               </td>
               <td>
                 <input
-                  class="qrcodeformstyle main1input"
-                  id="newVideoName1"
-                  name="newVideoName1"
+                  class="qrcodeformstyle main1input form_data"
+                  id="videoID"
+                  name="videoID"
                   type="text"
                   placeholder="請搜尋影片ID"
                   :value="emitName[i]"
@@ -149,11 +150,14 @@
         </button>
         <br />
         <br />
-        <div class="btn btn-primary">送出</div>
+        <!-- <div class="btn btn-primary" :click="doSumbit()" > -->          
+            <input type="button" class="btn btn-primary" value="送出" @click="doSumbit()">           
+        <!-- </div> -->
         </div>
       </div>
     </div>
   </div>
+  </form>
   <Footer></Footer>
 </template>
 <style>
@@ -186,6 +190,9 @@ export default {
         imgUrl: "",
       },
       emitName: [],
+      myObj:{
+        web:String,
+      }
     };
   },
   components: {
@@ -216,6 +223,26 @@ export default {
     }
   },
   methods: {
+    doSumbit(){      
+      let form_data0 = document.getElementsByTagName('input')[3].value
+      // console.log(this.myObj.web);
+      // this.myObj.push(form_data0);
+      console.log(this.myObj);
+      let form_data1 = document.getElementsByTagName('input')[4].value
+      let form_data2 = document.getElementsByTagName('input')[5].value
+      let form_data3 = document.getElementsByTagName('input')[6].value
+      let form_data4 = document.getElementsByTagName('input')[7].value
+      let form_data5 = document.getElementsByTagName('input')[8].value
+      let form_data6 = document.getElementsByTagName('input')[9].value
+      console.log(form_data0+"、"+form_data1+"、"+form_data2+"、"+form_data3+"、"+form_data4+"、"+form_data5+"、"+form_data6);
+
+      // for (let i = 0; i < data.length; i++) {
+      //       }
+      // console.log(JSON.stringify(form_data));
+      // JSON.stringify(form_data)
+
+
+    },
     addlist() {
       this.products.push({
       });

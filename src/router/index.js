@@ -2,27 +2,28 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path:"/test",
+    path: "/test",
     component: () =>
-    import(/* webpackChunkName: "about" */ "../views/test.vue"),
-    children:[
+      import(/* webpackChunkName: "about" */ "../views/test.vue"),
+    children: [
       {
-        path:'a',
-        components:{
-          a:()=>import("../components/testA.vue"),
-        }
+        path: "a",
+        components: {
+          a: () => import("../components/testA.vue"),
+        },
       },
       {
-        path:'b',
-        components:{
-          b:()=>import("../components/testB.vue")
-        }
+        path: "b",
+        components: {
+          b: () => import("../components/testB.vue"),
+        },
       },
-    ]      
+    ],
   },
+
   {
     path: "/viewboardA",
-    name: "viewboardA",    
+    name: "viewboardA",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/viewboardA.vue"),
   },
@@ -35,7 +36,6 @@ const routes = [
   {
     path: "/videoMain",
     name: "videoMain",
-    // alias:"/",
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/videoMain.vue"),
     children: [
@@ -73,7 +73,7 @@ const routes = [
   },
   {
     path: "/",
-    name: "Login",    
+    name: "Login",
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/Login.vue"),
   },
@@ -96,7 +96,7 @@ const routes = [
   {
     path: "/qrcodeMain",
     name: "qrcodeMain",
-    
+
     component: () => import("../components/qrcodeMain.vue"),
   },
   {
@@ -117,20 +117,18 @@ const routes = [
   {
     path: "/videoPlayer",
     name: "videoPlayer",
-    component: () =>
-      import("../components/videoPlayer.vue"),
+    component: () => import("../components/videoPlayer.vue"),
   },
   {
     path: "/videoMemberplace",
     name: "videoMemberplace",
-    alias: '/',
-    component: () => 
-      import("../components/videoMemberplace.vue"),
+    alias: "/",
+    component: () => import("../components/videoMemberplace.vue"),
     children: [
       {
         path: "videoOrganization",
         name: "videoOrganization",
-        alias: '/',
+        alias: "/",
         components: {
           videoOrganization: () =>
             import("../components/videoOrganization.vue"),
@@ -139,16 +137,15 @@ const routes = [
       {
         path: "videoEditinfo",
         name: "videoEditinfo",
-        alias: '/',
+        alias: "/",
         components: {
-          videoEditinfo: () =>
-            import("../components/videoEditinfo.vue"),
+          videoEditinfo: () => import("../components/videoEditinfo.vue"),
         },
       },
       {
         path: "videoChangepassword",
         name: "videoChangepassword",
-        alias: '/',
+        alias: "/",
         components: {
           videoChangepassword: () =>
             import("../components/videoChangepassword.vue"),

@@ -1,6 +1,36 @@
 <template>
-  <!-- <videoHeader /> -->
-  <h1 class="mt-5">會員專區</h1>
+    <nav class="navbar navbar-expand-sm navbar-light px-2">
+    <div class="logo">
+      <img src="../assets/LOGO_210623.jpg" alt="" />
+    </div>    
+    <ul class="navbar-nav ms-auto mb-lg-0">
+      <li class="nav-item">
+        <router-link
+          to="/videoMain/videolist_handout"
+          id="prevent_header"
+          class="m-3"
+          >互動講義</router-link
+        >
+      </li>
+      <li class="nav-item">
+        <router-link to="/videoResource" id="prevent_header" class="m-3"
+          >素材總管</router-link
+        >
+      </li>
+      <li class="nav-item">
+        <router-link
+          to="/videoMemberplace/videoEditinfo"
+          id="prevent_header"
+          class="m-3"
+          >會員中心</router-link
+        >
+      </li>
+      <li class="nav-item">
+        <router-link to="/" id="prevent_header" class="m-3">登出</router-link>
+      </li>
+    </ul> 
+  </nav>
+  <h1 class="mt-1">會員專區</h1>
   <div class="container">    
     <hr class="m-3" />
     <div class="d-flex pb-5">
