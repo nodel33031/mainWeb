@@ -1,8 +1,8 @@
 <template>
   <Header></Header>
   <Searchmodal v-on:sureMovie="emitMain"></Searchmodal>
-  <form action="" >
-  <div class="container" style="padding-bottom:12rem">
+
+  <div class="container" style="padding-bottom: 12rem">
     <div class="row">
       <div class="col">
         <!-- Content here -->
@@ -54,14 +54,14 @@
         </div>
       </div>
       <div class="col">
-        <div class="qrcode m-auto border">
-          <img src="https://picsum.photos/300/300/?random=10" />
+        <div class="qrcode m-auto border" id="qrimg" style="height:400px;width:400px">
+          <!-- <img id="qrimg" src="https://picsum.photos/300/300/?random=10" /> -->
         </div>
         <div
           id="imgwebqrcode"
           style="
             background-color: rgb(211, 211, 211);
-            width: 300px;
+            width: 400px;
             margin: 0 auto;
           "
         >
@@ -85,7 +85,7 @@
           </thead>
 
           <tbody>
-            <tr v-for="(item, i) in products" :key="item.id">
+            <tr v-for="(item, i) in products"  :key="item.id" >
               <td>
                 <input
                   class="qrcodeformstyle1 main1input form_data"
@@ -94,6 +94,7 @@
                   type="text"
                   placeholder="順序"
                   :value="i + 1"
+                  @click="this.videoList.videos[i].order = $event.target.value"
                 />
               </td>
               <td>
@@ -103,6 +104,7 @@
                   name="videoName"
                   type="text"
                   placeholder="請輸入影片名稱"
+                  @click="this.videoList.videos[i].videoName = $event.target.value"
                 />
               </td>
               <td>
@@ -112,6 +114,7 @@
                   name="videoTitle"
                   type="text"
                   placeholder="請輸入影片題目"
+                  @click="this.videoList.videos[i].comment = $event.target.value"
                 />
               </td>
               <td>
@@ -122,6 +125,7 @@
                   type="text"
                   placeholder="請搜尋影片ID"
                   :value="emitName[i]"
+                  @click="this.videoList.videos[i].video_id = $event.target.value"
                 />
               </td>
               <td>
@@ -137,27 +141,33 @@
             </tr>
           </tbody>
         </table>
-        <div style="text-align:left">        
-        <button
-          type="button"
-          v-on:click="addlist()"
-          class="btn btn-primary me-2 "  
-        >
-          增加
-        </button>
-        <button type="button" v-on:click="del()" class="btn btn-primary">
-          刪除
-        </button>
-        <br />
-        <br />
-        <!-- <div class="btn btn-primary" :click="doSumbit()" > -->          
-            <input type="button" class="btn btn-primary" value="送出" @click="doSumbit()">           
-        <!-- </div> -->
+        <div style="text-align: left">
+          <button
+            type="button"
+            v-on:click="addlist()"
+            class="btn btn-primary me-2"
+          >
+            增加
+          </button>
+          <button type="button" v-on:click="del()" class="btn btn-primary">
+            刪除
+          </button>
+          <br />
+          <br />
+          <!-- <div class="btn btn-primary" :click="doSumbit()" > -->
+          <input
+            type="button"
+            class="btn btn-primary"
+            value="送出"
+            @click="doSumbit()"
+          />
+
+          <!-- </div> -->
         </div>
       </div>
     </div>
   </div>
-  </form>
+
   <Footer></Footer>
 </template>
 <style>
@@ -173,7 +183,7 @@ table .main1input {
   border-bottom: none;
   /* color: rgb(211, 211, 211); */
 }
-h2{
+h2 {
   text-align: start;
 }
 </style>
@@ -185,20 +195,36 @@ const products = [{}];
 export default {
   data() {
     return {
-      products: [],
+      videoList: {
+        custom_url: null,
+        playlist_name: null,
+        videos: [
+          {
+            order: null,
+            videoName: null,
+            comment: null,
+            video_id: null,
+          },
+        ],
+      },
+      // abQrcode:[{
+      //   listName:null,
+      //   imgUrl:null,
+      // }],
+      products: [{}],
       webqrcode: {
         imgUrl: "",
       },
       emitName: [],
-      myObj:{
-        web:String,
-      }
+      myObj: {
+        web: String,
+      },
     };
   },
   components: {
     Searchmodal,
     Header,
-    Footer
+    Footer,
   },
   created() {
     this.products = products;
@@ -223,42 +249,83 @@ export default {
     }
   },
   methods: {
-    doSumbit(){      
-      let form_data0 = document.getElementsByTagName('input')[3].value
+    doSumbit() {
+      // console.log(this.videoList);
+      this.videoList.custom_url = document.getElementsByTagName("input")[3].value;
+      this.videoList.playlist_name = document.getElementsByTagName("input")[4].value;
+      // console.log(document.querySelectorAll("#videoID"));
+      document.getElementById("videoID").click();
+      document.getElementById("videoOrder").click();
+      document.getElementById("videoName").click();
+      document.getElementById("videoTitle").click();
+      console.log(JSON.stringify(this.videoList));   
+       const apiUrl = "http://192.168.0.20:8000/qrcode/create";
+       fetch(apiUrl, {
+        body: JSON.stringify(this.videoList), // must match 'Content-Type' header
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, same-origin, *omit
+        headers: {
+           "user-agent": "Mozilla/4.0 MDN Example",
+           "content-type": "application/json",
+         },
+         method: "POST", // *GET, POST, PUT, DELETE, etc.
+         mode: "cors", // no-cors, cors, *same-origin
+         redirect: "follow", // manual, *follow, error
+         referrer: "no-referrer", // *client, no-referrer
+       })
+         .then((response) => {
+          //  document.getElementById("qrimg").src = response;
+          return response.blob();
+      })
+         .then((imageBlob)=>{
+           let img = document.createElement('IMG')
+           document.querySelector('#qrimg').appendChild(img);
+           img.src=URL.createObjectURL(imageBlob);
+      });
+      console.log(document.getElementsByTagName('img'));
+        // document.getElementsByTagName('img').style.height="200px";
+
+
+      //   .then((data) => {
+      //     document.getElementById("qrimg").src = data;
+      //   });
+        // console.log(JSON.stringify(this.videoList));    
+      // let form_data0 = document.getElementsByTagName('input')[3].value
       // console.log(this.myObj.web);
       // this.myObj.push(form_data0);
-      console.log(this.myObj);
-      let form_data1 = document.getElementsByTagName('input')[4].value
-      let form_data2 = document.getElementsByTagName('input')[5].value
-      let form_data3 = document.getElementsByTagName('input')[6].value
-      let form_data4 = document.getElementsByTagName('input')[7].value
-      let form_data5 = document.getElementsByTagName('input')[8].value
-      let form_data6 = document.getElementsByTagName('input')[9].value
-      console.log(form_data0+"、"+form_data1+"、"+form_data2+"、"+form_data3+"、"+form_data4+"、"+form_data5+"、"+form_data6);
-
+      // console.log(this.myObj);
+      // let form_data1 = document.getElementsByTagName('input')[4].value
+      // let form_data2 = document.getElementsByTagName('input')[5].value
+      // let form_data3 = document.getElementsByTagName('input')[6].value
+      // let form_data4 = document.getElementsByTagName('input')[7].value
+      // let form_data5 = document.getElementsByTagName('input')[8].value
+      // let form_data6 = document.getElementsByTagName('input')[9].value
+      // console.log(form_data0+"、"+form_data1+"、"+form_data2+"、"+form_data3+"、"+form_data4+"、"+form_data5+"、"+form_data6);
       // for (let i = 0; i < data.length; i++) {
       //       }
       // console.log(JSON.stringify(form_data));
       // JSON.stringify(form_data)
-
-
+      // document.querySelector("#videoID").click();
+      // document.getElementById("videoOrder").click();
+      // document.getElementById("videoName").click();
+      // document.getElementById("videoTitle").click();
+         
     },
     addlist() {
-      this.products.push({
-      });
+      this.products.push({});
     },
     del() {
       console.log(this.products.length);
-      let index =this.products.length-1;
+      let index = this.products.length - 1;
       // const math =this.products.length-1
       if (this.products.length < 2) {
-        this.emitName.splice(index,1);
+        this.emitName.splice(index, 1);
         alert("無新增欄位可以刪除");
         return;
       }
       this.products.pop();
-      this.emitName.splice(index,1);
-    },   
+      this.emitName.splice(index, 1);
+    },
     selfmade() {
       // console.log(this.webqrcode.imgUrl);
       document.getElementById("input_text").value = "";
@@ -266,7 +333,8 @@ export default {
     },
     random() {
       document.getElementById("input_text").value = this.webqrcode.imgUrl;
-      document.getElementById("imgwebqrcode").innerText = "https://web.ly-edu.com.tw/to/"+this.webqrcode.imgUrl;
+      document.getElementById("imgwebqrcode").innerText =
+        "https://web.ly-edu.com.tw/to/" + this.webqrcode.imgUrl;
     },
     emitMain(data) {
       console.log(data);
