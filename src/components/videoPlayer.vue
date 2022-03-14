@@ -42,6 +42,8 @@ const options = reactive({
   src: "http://192.168.0.20:8000/video/play/212?type=m3u8&fileName=test.m3u8", //视频源
   type: "m3u8",
 });
+
+
 </script>
 <style>
 .footer {

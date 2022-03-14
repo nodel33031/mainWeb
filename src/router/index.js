@@ -20,7 +20,13 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/to/86e485be-2d82-4a72-a67c-c8ea1f5e5660",
+    name: "",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/videoPlayer.vue"),    
 
+  },
   {
     path: "/viewboardA",
     name: "viewboardA",

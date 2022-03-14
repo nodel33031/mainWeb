@@ -253,7 +253,14 @@ export default {
       // console.log(this.videoList);
       this.videoList.custom_url = document.getElementsByTagName("input")[3].value;
       this.videoList.playlist_name = document.getElementsByTagName("input")[4].value;
-      // console.log(document.querySelectorAll("#videoID"));
+      // document.getElementsByTagName('input').click();
+      // document.querySelectorAll(".form_data").click();
+      // const form_datas=document.querySelectorAll(".form_data")
+      // console.log(form_datas);
+      // console.log();
+      // form_datas.forEach(element => {
+      //   element.click()        
+      // });
       document.getElementById("videoID").click();
       document.getElementById("videoOrder").click();
       document.getElementById("videoName").click();
@@ -282,7 +289,7 @@ export default {
            document.querySelector('#qrimg').appendChild(img);
            img.src=URL.createObjectURL(imageBlob);
       });
-      console.log(document.getElementsByTagName('img'));
+      // console.log(document.getElementsByTagName('img'));
         // document.getElementsByTagName('img').style.height="200px";
 
 
