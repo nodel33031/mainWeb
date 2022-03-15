@@ -124,13 +124,15 @@ export default {
     },
     selectTr(index) {
       this.currentIndex = index;
-      console.log(index);
+      console.log(this.modalDatabase[this.currentIndex].id);
+      console.log(this.modalDatabase[this.currentIndex].filename);
+
     },
     sureMovie() {
       this.movieName = this.modalDatabase[this.currentIndex].id;
       // console.log(this.currentIndex);
       console.log(this.modalDatabase[this.currentIndex].id);
-      this.$emit("sureMovie", this.modalDatabase[this.currentIndex].id);
+      this.$emit("sureMovie", this.modalDatabase[this.currentIndex].id,this.modalDatabase[this.currentIndex].filename);
       // console.log(123456);
     },
   },

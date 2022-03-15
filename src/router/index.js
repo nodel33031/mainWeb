@@ -10,6 +10,12 @@ const routes = [
         path: "a",
         components: {
           a: () => import("../components/testA.vue"),
+          children:[
+            {
+              path:'uuuu',
+              uuuu:()=>import("../components/videoPlayer.vue"),              
+            }
+          ]
         },
       },
       {
@@ -21,11 +27,10 @@ const routes = [
     ],
   },
   {
-    path: "/to/86e485be-2d82-4a72-a67c-c8ea1f5e5660",
+    path: "/to/:urlVideoPlayer",
     name: "",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/videoPlayer.vue"),    
-
+      import(/* webpackChunkName: "about" */ "../components/videoPlayer.vue"), 
   },
   {
     path: "/viewboardA",
