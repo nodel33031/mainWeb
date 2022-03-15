@@ -67,6 +67,7 @@
         >
           {{ "https://web.ly-edu.com.tw/to/" + webqrcode.imgUrl }}
         </div>
+        <!-- <div>User {{ $route.params.id }}</div> -->
       </div>
     </div>
     <br />

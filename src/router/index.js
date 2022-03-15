@@ -1,33 +1,33 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
+  // {
+  //   path: "/test",
+  //   component: () =>
+  //     import("../views/test.vue"),
+  //   children: [
+  //     {
+  //       path: "a",
+  //       components: {
+  //         a: () => import("../components/testA.vue"),
+  //         children:[
+  //           {
+  //             path:'uuuu',
+  //             uuuu:()=>import("../components/videoPlayer.vue"),              
+  //           }
+  //         ]
+  //       },
+  //     },
+  //     {
+  //       path: "b",
+  //       components: {
+  //         b: () => import("../components/testB.vue"),
+  //       },
+  //     },
+  //   ],
+  // },
   {
-    path: "/test",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/test.vue"),
-    children: [
-      {
-        path: "a",
-        components: {
-          a: () => import("../components/testA.vue"),
-          children:[
-            {
-              path:'uuuu',
-              uuuu:()=>import("../components/videoPlayer.vue"),              
-            }
-          ]
-        },
-      },
-      {
-        path: "b",
-        components: {
-          b: () => import("../components/testB.vue"),
-        },
-      },
-    ],
-  },
-  {
-    path: "/to/:urlVideoPlayer",
+    path: "/to/:id",
     name: "",
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/videoPlayer.vue"), 
