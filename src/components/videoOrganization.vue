@@ -15,7 +15,7 @@
               v-for="(item, index) in accountMember"
               :key="index"
               style="cursor: pointer;list-style:none;font-size:28px"
-            >{{item.id}}<i class="fas fa-trash" style="width: 100px"></i></li>
+            >{{item.id}}<i class="fas fa-trash" style="width: 100px" @click="delaccountMember(index)"></i></li>
             </ul>
           </div>
           <div class="input-group " >
@@ -45,7 +45,7 @@
               v-for="(item, index) in teamName"
               :key="index"
               style="cursor: pointer;list-style:none;font-size:28px"
-            >{{item.id}}<i class="fas fa-trash" style="width: 100px"></i></li>
+            >{{item.id}}<i class="fas fa-trash" style="width: 100px" @click="delteamName(index)"></i></li>
             </ul>
           </div>
           <div class="input-group ">
@@ -79,18 +79,6 @@ export default {
         {
           id: "王曉明",
         },
-        // {
-        //   id: "白泡泡"
-        // },
-        // {
-        //   id: "王曉明",
-        // },
-        // {
-        //   id: "王曉明",
-        // },
-        // {
-        //   id: "王曉明",
-        // },
       ],
       teamName: [
         {
@@ -101,12 +89,23 @@ export default {
   },
   components: {},
   methods: {
+    delaccountMember(index){
+      // this.accountMember[index]
+      console.log(this.accountMember[index].id);
+      this.accountMember.splice(index, 1);
+
+    },
+    delteamName(index){
+      console.log(this.teamName[index].id);
+      this.teamName.splice(index, 1);
+    },
     join() {
       let userAccount =document.querySelector('.userAccount').value
       if(userAccount !==""){    
       this.accountMember.push({id:userAccount})
-      document.querySelector('.userAccount').value=""
       console.log(document.querySelector('.userAccount').value);
+      document.querySelector('.userAccount').value=""
+      
       }
     },
     build() {
