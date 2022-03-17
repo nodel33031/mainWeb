@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading"></Loading>
   <handoutAddlist v-on:addList="addFile"></handoutAddlist>
   <handoutPost></handoutPost>
   <div style="position: static; text-align: right" class="my-2">
@@ -100,6 +101,7 @@ export default {
       imgUrlpdf: "/img/pdf.9be47a84.jpg",
       imgUrlpng: "/img/png.a72522c6.png",
       filePath: "",
+      isLoading:false,
       // test:"parents-test"
     };
   },
@@ -117,6 +119,7 @@ export default {
       const apiUrl = `http://192.168.0.20:8000/file/get/video_mgr?target=${file.filePath}`;
       // const apiUrl = `http://192.168.0.20:8000/file/get/video_mgr?target=/images/watermark`;
       console.log(apiUrl);
+      this.isLoading=true
       fetch(apiUrl)
         .then((response) => {
           console.log(response);
@@ -124,10 +127,12 @@ export default {
         })
         .then((data) => {
           this.database = data;
+          this.isLoading=false;
         });
     },
     getData() {
       let filePath = ``;
+      this.isLoading=true
       const apiUrl =
         // "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
         `http://192.168.0.20:8000/file/get/video_mgr?target=/${filePath}`;
@@ -138,11 +143,8 @@ export default {
         })
         .then((data) => {
           this.database = data;
-          // console.log(this.database.length);`
-          // console.log(this.database[0]);
-          // console.log(this.database[0].directory);
-          // console.log(this.database[1].fileName);
-          // console.log(this.database[1].fileName.substr(-4));
+          this.isLoading=false;
+
         });
     },
     setDatabase(directory, fileName) {

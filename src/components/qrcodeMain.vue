@@ -100,11 +100,11 @@
               <td>
                 <input
                   class="qrcodeformstyle main1input form_data"
-                  id="videoName"
-                  name="videoName"
+                  id="video_name"
+                  name="video_name"
                   type="text"
                   placeholder="請輸入影片名稱"
-                  v-model="this.videoList.videos[i].videoName"
+                  v-model="this.videoList.videos[i].video_name"
                 />
               </td>
               <td>
@@ -188,7 +188,6 @@ h2 {
 import Header from "@/components/qrcodeHeader.vue";
 import Searchmodal from "@/components/qrcodeSearchmodal.vue";
 import Footer from "@/components/qrcodeFooter.vue";
-// const products = [{}];
 export default {
   data() {
     return {
@@ -198,7 +197,7 @@ export default {
         videos: [
           {
             order: 1,
-            videoName: null,
+            video_name: null,
             comment: null,
             video_id: null,
           },
@@ -242,13 +241,8 @@ export default {
     }
   },
   methods: {
-    // sendUrl(){
-    //   const url = this.webqrcode.imgUrl      
-    //   console.log(url);      
-    //   this.router.push({path:`http://192.168.0.20:8000/${url}`})      
-    // },
+
     doSumbit() {
-      // console.log(this.videoList);
       this.videoList.custom_url = document.getElementsByTagName("input")[3].value;
       this.videoList.playlist_name = document.getElementsByTagName("input")[4].value;
 
@@ -280,7 +274,7 @@ export default {
         
     },
     addlist() {
-      this.videoList.videos.push({order:this.videoList.videos.length+1,videoName: null,comment: null,video_id: null,});
+      this.videoList.videos.push({order:this.videoList.videos.length+1,video_name: null,comment: null,video_id: null,});
     },
     del() {
       console.log(this.videoList.videos);
@@ -288,6 +282,7 @@ export default {
       // const math =this.products.length-1
       if (this.videoList.videos.length < 2) {
         this.emitName.splice(index, 1);
+        window.location.reload();
         alert("無新增欄位可以刪除");
         return;
       }
@@ -313,7 +308,7 @@ export default {
       // this.videoList.videos[i].video_id=this.emitName[i]
       console.log(this.videoList.videos[i-1].video_id);
       this.videoList.videos[i-1].video_id=data
-      this.videoList.videos[i-1].videoName=data2
+      this.videoList.videos[i-1].video_name=data2
       
     },
   },

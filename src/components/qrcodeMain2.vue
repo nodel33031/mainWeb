@@ -4,6 +4,7 @@
     <div class="row">
       <div class="position-relative m-3">
         <h2 class="text-center">查詢影片</h2>
+        <Loading :active="isLoading"></Loading>
       </div>
 
       <div class="d-flex ps-5">
@@ -80,7 +81,8 @@
               v-for="(item, index) in datasource"
               :key="item.id"
               style="cursor: pointer"
-              :class="{ active: index == currentIndex }"
+              :class="{ active: index == selectThisColor }"
+              @click="selectThis(index)"
             >
               <div class="col-2">
                 <p class="m-2">{{ item.id }}</p>
@@ -152,7 +154,8 @@ export default {
       searchValue: "",
       currentIndex: 0,
       currentFilename: "",
-      // emitfile:[],
+      isLoading:false,
+      selectThisColor:null,
     };
   },
   components: {
@@ -162,6 +165,10 @@ export default {
     
   },
   methods: {
+    selectThis(index){
+      this.selectThisColor = index;
+
+    },
     selectTr(index) {
       this.currentIndex = index;
       console.log(this.currentIndex);
@@ -173,7 +180,7 @@ export default {
       console.log(this.searchValue);
     },
     // 上一頁
-    previousPage() {
+    previousPage() {      
       if (this.contain == false) {
         alert(`請輸入查詢關鍵字><"`);
       } else if (this.pageNum <= 0) {
@@ -220,6 +227,7 @@ export default {
     },
     // 搜尋鍵
     getData() {
+      this.isLoading=true
       this.contain = true;
       this.pageNum = 0;
       let pageNum = this.pageNum;
@@ -237,6 +245,7 @@ export default {
           this.datasource = data.content;
           console.log(data.totalPages);
           this.totalPages = data.totalPages;
+          this.isLoading=false
         });
     },
     // 刪除
@@ -263,4 +272,8 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+  .active{
+    color: blue;
+  }
+</style>

@@ -1,4 +1,5 @@
 <template>
+
   <div
     class="modal fade"
     id="exampleModal"
@@ -10,6 +11,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">搜尋影片</h5>
+          <Loading :active="isLoading"></Loading>
           <button
             type="button"
             class="btn-close"
@@ -98,19 +100,20 @@ export default {
       modalDatabase: [],
       currentIndex: 0,
       searchValue:"",
+      isLoading:false,
     };
   },
   created() {
   },
   methods: {
-    modalSearch() {
+    modalSearch() {      
       this.searchValue=document.getElementById('searchValue').value;      
       let searchValue =this.searchValue;
       if(searchValue==""){
         alert("請輸入關鍵字")
 
       }
-
+      this.isLoading=true
       const apiUrl = `http://192.168.0.20:8000/search/video/${searchValue}?pageNum=0&queryCount=50&queryBy=keyword`;
       fetch(apiUrl)
         .then((response) => {
@@ -119,8 +122,10 @@ export default {
         })
         .then((data) => {
           this.modalDatabase = data.content;
-          console.log(this.modalDatabase.length);
+          this.isLoading=false
+
         });
+        
     },
     selectTr(index) {
       this.currentIndex = index;

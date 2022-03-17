@@ -1,34 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
-  // {
-  //   path: "/test",
-  //   component: () =>
-  //     import("../views/test.vue"),
-  //   children: [
-  //     {
-  //       path: "a",
-  //       components: {
-  //         a: () => import("../components/testA.vue"),
-  //         children:[
-  //           {
-  //             path:'uuuu',
-  //             uuuu:()=>import("../components/videoPlayer.vue"),              
-  //           }
-  //         ]
-  //       },
-  //     },
-  //     {
-  //       path: "b",
-  //       components: {
-  //         b: () => import("../components/testB.vue"),
-  //       },
-  //     },
-  //   ],
-  // },
+
   {
     path: "/to/:id",
-    name: "",
+    name: "videoPlayer",
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/videoPlayer.vue"), 
   },
@@ -125,11 +101,11 @@ const routes = [
     name: "qrcodeSearchmodal",
     component: () => import("../components/qrcodeSearchmodal.vue"),
   },
-  {
-    path: "/videoPlayer",
-    name: "videoPlayer",
-    component: () => import("../components/videoPlayer.vue"),
-  },
+  // {
+  //   path: "/videoPlayer",
+  //   name: "videoPlayer",
+  //   component: () => import("../components/videoPlayer.vue"),
+  // },
   {
     path: "/videoMemberplace",
     name: "videoMemberplace",
