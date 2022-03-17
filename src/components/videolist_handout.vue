@@ -144,7 +144,11 @@ export default {
         .then((data) => {
           this.database = data;
           this.isLoading=false;
-
+          // console.log(this.database.length);`
+          // console.log(this.database[0]);
+          // console.log(this.database[0].directory);
+          // console.log(this.database[1].fileName);
+          // console.log(this.database[1].fileName.substr(-4));
         });
     },
     setDatabase(directory, fileName) {

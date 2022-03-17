@@ -62,7 +62,9 @@ import qrcodeFooter from "../components/qrcodeFooter.vue"
 
 export default {
   data() {
-    return {};
+    return {
+      
+    };
   },
   components: {    
     qrcodeFooter,
