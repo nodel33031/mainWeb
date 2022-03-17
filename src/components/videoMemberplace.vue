@@ -87,5 +87,23 @@ export default {
   color: #fff;
   }
 }
+.logo img {
+  height: 80px;
+  margin: 15px;
+}
+#prevent_header {
+  text-decoration: none;
+  color: #1b1f71;
+  font-weight: 600;
+  font-size: 18px;
+  background-image: linear-gradient(#00174d, #e6e6e6);
+  background-position: left bottom;
+  background-size: 0 2.5px;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s;
+  &:hover {
+    background-size: 100% 2.5px;
+  }
+}
   
 </style>

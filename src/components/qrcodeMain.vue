@@ -241,7 +241,6 @@ export default {
     }
   },
   methods: {
-
     doSumbit() {
       this.videoList.custom_url = document.getElementsByTagName("input")[3].value;
       this.videoList.playlist_name = document.getElementsByTagName("input")[4].value;
