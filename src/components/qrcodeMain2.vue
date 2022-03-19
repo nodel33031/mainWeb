@@ -226,8 +226,7 @@ export default {
       }
     },
     // 搜尋鍵
-    getData() {
-      this.isLoading=true
+    getData() {      
       this.contain = true;
       this.pageNum = 0;
       let pageNum = this.pageNum;
@@ -239,6 +238,7 @@ export default {
       }
       fetch(apiUrl)
         .then((response) => {
+          this.isLoading=true
           return response.json();
         })
         .then((data) => {

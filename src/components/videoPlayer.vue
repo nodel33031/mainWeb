@@ -52,7 +52,8 @@ export default {
         color: "#409eff", //主题色
         currentTime: 60,
         speed: false, //关闭进度条拖动
-        title: "", //视频名称
+        title: "", //视频名称       
+
       },
     };
   },

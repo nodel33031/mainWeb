@@ -6,7 +6,7 @@ const routes = [
     path: "/to/:id",
     name: "videoPlayer",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/videoPlayer.vue"), 
+      import(/* webpackChunkName: "about" */ "../components/testVideo.vue"), 
   },
   {
     path: "/viewboardA",
@@ -108,14 +108,12 @@ const routes = [
   // },
   {
     path: "/videoMemberplace",
-    name: "videoMemberplace",
-    alias: "/",
+    name: "videoMemberplace",    
     component: () => import("../components/videoMemberplace.vue"),
     children: [
       {
         path: "videoOrganization",
-        name: "videoOrganization",
-        alias: "/",
+        name: "videoOrganization",        
         components: {
           videoOrganization: () =>
             import("../components/videoOrganization.vue"),
@@ -123,16 +121,14 @@ const routes = [
       },
       {
         path: "videoEditinfo",
-        name: "videoEditinfo",
-        alias: "/",
+        name: "videoEditinfo",        
         components: {
           videoEditinfo: () => import("../components/videoEditinfo.vue"),
         },
       },
       {
         path: "videoChangepassword",
-        name: "videoChangepassword",
-        alias: "/",
+        name: "videoChangepassword",        
         components: {
           videoChangepassword: () =>
             import("../components/videoChangepassword.vue"),
