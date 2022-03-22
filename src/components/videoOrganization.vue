@@ -1,6 +1,6 @@
 <template>
   <videoOrganizationsetTeam></videoOrganizationsetTeam>
-  <div>    
+  <div>
     <div style="max-width: 1024px; margin: auto">
       <!-- <div class="row"> -->
       <div class="d-flex justify-content-around" style="padding-bottom: 250px">
@@ -13,12 +13,13 @@
                 :key="index"
                 style="cursor: pointer; list-style: none; font-size: 28px"
               >
-                {{ item.id
-                }}<i
-                  class="fas fa-trash"
-                  style="width: 100px"
+                {{ item.id }}
+                <button
+                  class="btn btn-primary"
                   @click="delaccountMember(index)"
-                ></i>
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
               </li>
             </ul>
           </div>
@@ -58,10 +59,9 @@
                   data-bs-target="#exampleModal"
                 >
                   <i class="fas fa-cog"></i></button
-                ><button class="btn btn-primary"  @click="delteamName(index)"><i
-                  class="fas fa-trash"                  
-                 
-                ></i></button>
+                ><button class="btn btn-primary" @click="delteamName(index)">
+                  <i class="fas fa-trash"></i>
+                </button>
               </li>
             </ul>
           </div>
@@ -80,7 +80,7 @@
               @click="build()"
             >
               建立
-            </button>            
+            </button>
           </div>
         </div>
       </div>
@@ -91,7 +91,7 @@
 <script>
 // import setTeam from "@/components/videoOrganizationsetTeam.vue"
 // import setTeam from ''
-import videoOrganizationsetTeam from "../components/videoOrganizationsetTeammodal.vue"
+import videoOrganizationsetTeam from "../components/videoOrganizationsetTeammodal.vue";
 export default {
   data() {
     return {
@@ -108,7 +108,7 @@ export default {
     };
   },
   components: {
-    videoOrganizationsetTeam
+    videoOrganizationsetTeam,
   },
   methods: {
     delaccountMember(index) {
