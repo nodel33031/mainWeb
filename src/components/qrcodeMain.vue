@@ -54,7 +54,11 @@
         </div>
       </div>
       <div class="col">
-        <div class="qrcode m-auto border" id="qrimg" style="height:400px;width:400px">
+        <div
+          class="qrcode m-auto border"
+          id="qrimg"
+          style="height: 400px; width: 400px"
+        >
           <!-- <img id="qrimg" src="https://picsum.photos/300/300/?random=10" /> -->
         </div>
         <div
@@ -86,7 +90,7 @@
           </thead>
 
           <tbody>
-            <tr v-for="(item, i) in videoList.videos"  :key="item.id" >
+            <tr v-for="(item, i) in videoList.videos" :key="item.id">
               <td>
                 <input
                   class="qrcodeformstyle1 main1input form_data"
@@ -94,7 +98,7 @@
                   name="videoOrder"
                   type="text"
                   placeholder="順序"
-                  v-model="this.videoList.videos[i].order"                  
+                  v-model="this.videoList.videos[i].order"
                 />
               </td>
               <td>
@@ -114,7 +118,7 @@
                   name="videoTitle"
                   type="text"
                   placeholder="請輸入影片題目"
-                  v-model="this.videoList.videos[i].comment"                  
+                  v-model="this.videoList.videos[i].comment"
                 />
               </td>
               <td>
@@ -123,9 +127,8 @@
                   id="videoID"
                   name="videoID"
                   type="text"
-                  placeholder="請搜尋影片ID"                  
+                  placeholder="請搜尋影片ID"
                   v-model="emitName[i]"
-                  
                 />
               </td>
               <td>
@@ -153,13 +156,13 @@
             刪除
           </button>
           <br />
-          <br />          
+          <br />
           <input
             type="button"
             class="btn btn-primary"
             value="送出"
             @click="doSumbit()"
-          />                
+          />
         </div>
       </div>
     </div>
@@ -242,38 +245,52 @@ export default {
   },
   methods: {
     doSumbit() {
-      this.videoList.custom_url = document.getElementsByTagName("input")[3].value;
-      this.videoList.playlist_name = document.getElementsByTagName("input")[4].value;
+      this.videoList.custom_url =
+        document.getElementsByTagName("input")[3].value;
+      this.videoList.playlist_name =
+        document.getElementsByTagName("input")[4].value;
 
-      console.log(JSON.stringify(this.videoList));   
-       const apiUrl = "http://192.168.0.20:8000/qrcode/create";
-       fetch(apiUrl, {
+      console.log(JSON.stringify(this.videoList));
+      const apiUrl = "http://192.168.0.20:8000/qrcode/create";
+      fetch(apiUrl, {
         body: JSON.stringify(this.videoList), // must match 'Content-Type' header
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         credentials: "same-origin", // include, same-origin, *omit
         headers: {
-           "user-agent": "Mozilla/4.0 MDN Example",
-           "content-type": "application/json",
-         },
-         method: "POST", // *GET, POST, PUT, DELETE, etc.
-         mode: "cors", // no-cors, cors, *same-origin
-         redirect: "follow", // manual, *follow, error
-         referrer: "no-referrer", // *client, no-referrer
-       })
-         .then((response) => {32         
-          return response.blob();
+          "user-agent": "Mozilla/4.0 MDN Example",
+          "content-type": "application/json",
+        },
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // *client, no-referrer
       })
-         .then((imageBlob)=>{
-           let img = document.createElement('IMG')
-           document.querySelector('#qrimg').appendChild(img);
-           img.src=URL.createObjectURL(imageBlob);
-      });
-        console.log(this.videoList.videos[0].order );
-        console.log(this.emitName);
-        
+        .then((response) => {
+          32;
+          return response.blob();
+        })
+        .then((imageBlob) => {
+          // console.log( document.querySelector(".qrcodeIMG"));
+          if(document.querySelector(".qrcodeIMG") == null){
+            let img = document.createElement("IMG");
+            img.className = "qrcodeIMG";
+            document.querySelector("#qrimg").appendChild(img);
+            img.src = URL.createObjectURL(imageBlob);
+            console.log( document.querySelector(".qrcodeIMG"));
+
+          }
+
+        });
+      console.log(this.videoList.videos[0].order);
+      console.log(this.emitName);
     },
     addlist() {
-      this.videoList.videos.push({order:this.videoList.videos.length+1,video_name: null,comment: null,video_id: null,});
+      this.videoList.videos.push({
+        order: this.videoList.videos.length + 1,
+        video_name: null,
+        comment: null,
+        video_id: null,
+      });
     },
     del() {
       console.log(this.videoList.videos);
@@ -298,17 +315,16 @@ export default {
       document.getElementById("imgwebqrcode").innerText =
         "https://web.ly-edu.com.tw/to/" + this.webqrcode.imgUrl;
     },
-    emitMain(data,data2) {
-      console.log(data,data2);      
+    emitMain(data, data2) {
+      console.log(data, data2);
       this.emitName.push(data);
-      let i =this.emitName.length;
+      let i = this.emitName.length;
       console.log(i);
       // this.emitName[i-1]=this.videoList.videos[i-1].video_id
       // this.videoList.videos[i].video_id=this.emitName[i]
-      console.log(this.videoList.videos[i-1].video_id);
-      this.videoList.videos[i-1].video_id=data
-      this.videoList.videos[i-1].video_name=data2
-      
+      console.log(this.videoList.videos[i - 1].video_id);
+      this.videoList.videos[i - 1].video_id = data;
+      this.videoList.videos[i - 1].video_name = data2;
     },
   },
 };

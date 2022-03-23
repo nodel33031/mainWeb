@@ -6,7 +6,7 @@ const routes = [
     path: "/to/:id",
     name: "videoPlayer",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/testVideo.vue"), 
+      import(/* webpackChunkName: "about" */ "../components/videoPlayer.vue"), 
   },
   {
     path: "/viewboardA",

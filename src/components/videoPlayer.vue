@@ -6,7 +6,8 @@
         alt="LOGO"
     /></a>
   </div>
-  <vue3VideoPlay
+  <vue3VideoPlay   
+    class="vue3VideoPlay " 
     width="375px"
     height="270px"
     title="柳吟影片"
@@ -24,20 +25,19 @@
     第{{ index + 1 }}部{{ item.video_name }}
   </button>
   <div class="listBr"></div>
-     <input
-      id="routerID"
-      style="display: none"
-      class="routerID"
-      type="text"
-      v-model="this.$route.params.id"
-    />
-    <div class="footer">
-      <div class="p-4" style="border-bottom: 1px solid #fff">
-        <img src="../assets/ly-logo.svg" />
-      </div>
-      <p class="footer_p">Copyright © 2021 柳吟國文 All Rights Reserved.</p>
+  <input
+    id="routerID"
+    style="display: none"
+    class="routerID"
+    type="text"
+    v-model="this.$route.params.id"
+  />
+  <div class="footer">
+    <div class="p-4" style="border-bottom: 1px solid #fff">
+      <img src="../assets/ly-logo.svg" />
     </div>
-  
+    <p class="footer_p">Copyright © 2021 柳吟國文 All Rights Reserved.</p>
+  </div>
 </template>
 <script>
 export default {
@@ -52,16 +52,16 @@ export default {
         color: "#409eff", //主题色
         currentTime: 60,
         speed: false, //关闭进度条拖动
-        title: "", //视频名称       
-
+        title: "", //视频名称
       },
     };
   },
-  mounted() {
+  mounted() {  
+  
     let routerID = document.getElementById("routerID").value;
     console.log(routerID);
     const apiUrl = `http://192.168.0.20:8000/to/${routerID}`;
-     console.log(apiUrl);
+    console.log(apiUrl);
     fetch(apiUrl)
       .then((response) => {
         console.log(response);
@@ -70,8 +70,10 @@ export default {
       .then((data) => {
         console.log(data[data.length - 1]);
         this.dataBaseU = data;
-
-        console.log(this.dataBaseU[0]);
+        let movieName = this.dataBaseU[0].video_name;
+        let movieIndex = this.dataBaseU[0].yakitory_id;
+        console.log(movieName);
+        this.options.src = `http://192.168.0.20:8000/video/play/${movieIndex}?type=m3u8&fileName=${movieName}`;
       });
   },
   methods: {
@@ -87,8 +89,8 @@ export default {
 };
 </script>
 <style lang="less">
-.btn_list{
-  margin-bottom:50px ;
+.btn_list {
+  margin-bottom: 50px;
 }
 #refPlayerWrap {
   margin: auto;
@@ -114,12 +116,10 @@ export default {
   width: 100%;
   height: 200px;
   text-align: left;
-
 }
 .footer p {
   color: #fff;
 }
-
 
 @media (min-width: 375px) {
   .header {

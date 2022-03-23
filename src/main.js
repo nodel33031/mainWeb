@@ -6,12 +6,13 @@ import vue3videoPlay from 'vue3-video-play'; // 引入组件
 import 'vue3-video-play/dist/style.css' ;// 引入css
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
-import Videojs from 'video.js'
-import 'video.js/dist/video-js.css' 
-import 'videojs-contrib-hls'
-import "@videojs/http-streaming"
+// import Videojs from 'video.js'
+// import 'video.js/dist/video-js.css' 
+// import 'videojs-contrib-hls'
+// import "@videojs/http-streaming"
+// import Video from 'video.js'
 
-
+// Vue.prototype.$video = Video
 
 
 createApp(App)    
@@ -20,4 +21,5 @@ createApp(App)
     .component('Loading',Loading)
     .mount("#app");
 
-    App.config.globalProperties.$video = Videojs
+    // App.config.globalProperties.$video = Videojs
+    
